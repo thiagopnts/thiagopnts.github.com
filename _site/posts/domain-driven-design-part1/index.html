@@ -1,0 +1,133 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Putting the Domain Model to Work</title>
+  <meta name="author" content="Thiago Pontes" />
+  <meta name="description" content="Programming, Javascript, Ruby, Ruby on Rails, Scala, Python" />
+  <meta property="fb:admins" content="thiagopnts"/>
+  <link rel="openid.server" href="http://www.clickpass.com/openid_server" />
+  <link rel="stylesheet" href="/css/compiled/base.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/css/plugins/pygments.css" type="text/css" />
+  <link media="only screen and (max-device-width: 480px)" href="/css/iphone.css" type="text/css" rel="stylesheet" />
+  <link media="only screen and (device-width: 768px)" href="/css/ipad.css" type="text/css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/compiled/application.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+    });
+  </script>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=254582621301698";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+    
+  <section class="sidebar">
+    <a href="/">
+      <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="75" width="75" class="avatar" />
+    </a>
+
+    <section class="name">
+      <a href="/">
+        <span id="thiago">Thiago</span>
+        <span id="pontes">Pontes</span>
+      </a>
+    </section>
+
+    <section class="alt-text">&nbsp;</section>
+
+    <section class="meta">
+      <a href="https://github.com/thiagopnts" id="github">
+        <img src="/images/github.png" alt="github" title="thiagopnts on GitHub" height="16" width="16" />
+      </a>
+      <a href="https://twitter.com/thiagopnts" id="twitter">
+        <img src="/images/twitter.png" alt="twitter" title="@thiagopnts on Twitter" height="16" width="16" />
+      </a>
+      <a href="http://feeds.feedburner.com/thiagopontes/lXRA" id="rss">
+        <img src="/images/rss.png" alt="rss" title="Subscribe to this blog's RSS feed" height="16" width="16" />
+      </a>
+      
+    </section>
+
+  </section>
+
+  <section class="content">
+  <h1>
+    <a href="/posts/domain-driven-design-part1">Putting the Domain Model to Work</a>
+  </h1>
+
+  <section class="byline">
+    May 24, 2012
+  </section>
+
+  <p>Today I started to read this book, it&rsquo;s about domain driven development, and it has a lot of good advices about development and how to build something useful in the best way possible.</p>
+
+<h2>Crunching Knowledge</h2>
+
+<p>Software development it&rsquo;s not about computers or code, it&rsquo;s always about something else. For instance, when developing software for green peace to map all the area cleared, your software is about ecology, so how can you code for something you don&rsquo;t understand? You have to learn about the domain, and how to apply this knowledge when creating your models.
+The first thing I learned was that your models will carry all the bussiness logic from your software(ok everyone knows that), but the new thing here is about the &ldquo;conception&rdquo; stage, don&rsquo;t using the &ldquo;find the nouns&rdquo; way of finding your models. Remeber you have to build this without know(yet) about the domain, so you will have to do this with the bussiness expert, usually is your client, which don&rsquo;t understand about software development, so you have to create your models in a way that your client understands it too, he will use specific words from his area, which you will have to learn, after sometime you and the business expert will start to understand each other.
+In the end your models will be code this way, and with some guidance, you can even show some code to him for validation. There is were the beauty is. And this &ldquo;crunching knowledge&rdquo; as the author says, is one of the most cool things in software development. As a software engineer, you could work with all kind of things, in all areas, because everything needs a software.</p>
+
+<h2>Communication and the Use of Language</h2>
+
+<p>On a project without a common language, developers have to translate for domain experts, and this translations ends turning into bottle necks, because developers tends to create abstractions that support their design but are not understood by the domain experts, and developers working on different parts of the problem work out their own design concepts and ways of describing the domain. A project faces serious problems when its language is fractured.
+A solution is to use a &ldquo;model-based&rdquo; language, which should be used among developers to describe not only artifacts in the system, but tasks and functionality. This same model should supply the language for the developers and domain experts to communicate with each other, and for the domain experts to communicate among themselves about requirements, development planning and features.</p>
+
+<h2>Binding Model and Implementation</h2>
+
+<p>As the project growls, the team ends to interprete the models of the diagrams in its own way, the project becomes chaotic and all the efforts made to make good models ends worthless. Most of its lost starts when the code begins, when developers are forced to come up with new abstractions for what was designed by the analists and it happens because wasn&rsquo;t given adequate access to domain experts for the developers.
+If the design, or some central part of it, does not map to the domain model, that model is of little value, and the correctness of the software is suspect. At the same time, complex mappings between models and design functions are difficult to understand and, in practice, impossible to maintain as the design changes. A deadly divide opens between analysis and design so that insight gained in each of those activities does not feed into the other.</p>
+
+
+  <section class="meta">
+    <h3>Discussion, links, and tweets</h3>
+    <section class="copy">
+      <a href="https://twitter.com/thiagopnts">
+        <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="80" width="80" />
+      </a>
+
+      <p>
+          I'm a Software Engineer Intern which among one line of code and a cup of coffee likes to listen to music and disagree with people. </br>
+          Feel free to send me a <a href="mailto:thiagopnts@gmail.com">email</a>. </br>
+          I'm <a href="https://twitter.com/thiagopnts">@thiagopnts</a> on Twitter. </br>
+          I'm <a href="http://git.io/thi">thiagopnts</a> on Github. </br>
+          You can find me on <a href="http://facebook.com/thiagopnts">Facebook</a> and <a href="http://www.linkedin.com/profile/view?id=82767657">Linkedin</a>.
+      </p>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-count="true" data-via="thiagopnts">Tweet</a>
+      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+      <a href="http://twitter.com/thiagopnts" class="twitter-follow-button" data-show-count="false">Follow @thiagopnts</a>
+      <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+      <div class="fb-like" data-href="http://thiagopontes.net/posts/domain-driven-design-part1" data-send="false" data-width="450" data-show-faces="true"></div>    
+      <div class="fb-comments" data-href="http://thiagopontes.net/posts/domain-driven-design-part1" data-num-posts="5" data-width="500"></div>    
+    </section>
+  </section>
+</section>
+
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18026195-3']);
+      _gaq.push(['_setDomainName', 'thiagopontes.net']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+
+</html>

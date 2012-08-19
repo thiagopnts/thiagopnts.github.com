@@ -1,0 +1,142 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Patterns of Enterprise Application Architecture - Putting It All Together</title>
+  <meta name="author" content="Thiago Pontes" />
+  <meta name="description" content="Programming, Javascript, Ruby, Ruby on Rails, Scala, Python" />
+  <meta property="fb:admins" content="thiagopnts"/>
+  <link rel="openid.server" href="http://www.clickpass.com/openid_server" />
+  <link rel="stylesheet" href="/css/compiled/base.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/css/plugins/pygments.css" type="text/css" />
+  <link media="only screen and (max-device-width: 480px)" href="/css/iphone.css" type="text/css" rel="stylesheet" />
+  <link media="only screen and (device-width: 768px)" href="/css/ipad.css" type="text/css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/js/compiled/application.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+    });
+  </script>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=254582621301698";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+    
+  <section class="sidebar">
+    <a href="/">
+      <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="75" width="75" class="avatar" />
+    </a>
+
+    <section class="name">
+      <a href="/">
+        <span id="thiago">Thiago</span>
+        <span id="pontes">Pontes</span>
+      </a>
+    </section>
+
+    <section class="alt-text">&nbsp;</section>
+
+    <section class="meta">
+      <a href="https://github.com/thiagopnts" id="github">
+        <img src="/images/github.png" alt="github" title="thiagopnts on GitHub" height="16" width="16" />
+      </a>
+      <a href="https://twitter.com/thiagopnts" id="twitter">
+        <img src="/images/twitter.png" alt="twitter" title="@thiagopnts on Twitter" height="16" width="16" />
+      </a>
+      <a href="http://feeds.feedburner.com/thiagopontes/lXRA" id="rss">
+        <img src="/images/rss.png" alt="rss" title="Subscribe to this blog's RSS feed" height="16" width="16" />
+      </a>
+      
+    </section>
+
+  </section>
+
+  <section class="content">
+  <h1>
+    <a href="/posts/enterprise-patterns-part8">Patterns of Enterprise Application Architecture - Putting It All Together</a>
+  </h1>
+
+  <section class="byline">
+    May 19, 2012
+  </section>
+
+  <p><img src="http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg" width="250" height="250" /></p>
+
+<h2>Chapter 8 &ndash; Putting It All Together</h2>
+
+<p>This post is like a summary of the other posts, here we will sweep everything together and start to answer the tricky question of what patterns to use when designing an enterprise application, the advice here is one that we already gave in the other posts, use this advice to prod your thinking, but don&rsquo;t use it as a replacement for your thinking. Even if you don&rsquo;t like the full story of extreme programming, you should still consider this three technical practices: continous integration, test driven development and refactoring.</p>
+
+<h2>Starting with the Domain Layer</h2>
+
+<p>The start of the process is deciding which domain logic approach to go with. The three main contenders are Transaction Script, Table Module and Domain Model. As said in the post that describe this patterns, to choose between them you have to consider the complexity of your domain logic, something that is hard to quantify and qualify in the beginning of the project, but there is other factors in the decision, in particular, the difficulty of the connection with a database. The simplest of the three patterns(Transaction Script), fits with the procedural model that most people are still comfortable with, which is easy to build on top of a relational database. However as your logic gets more complicated your difficulties multiply exponentially.</p>
+
+<p>Other option is the Domain Model pattern. The biggest difficult is to learning how to use a domain model. This pattern requires skill if it&rsquo;s to be done well, done poorly it&rsquo;s a disaster. The second big fault of a Domain Model is its connection to a relational database. But for many, mostly nontechnical, reasons an object database isn&rsquo;t a possible choice for a enterprise application.</p>
+
+<p>The Table Module represents an attractive middle ground between these poles. It can handle domain logic better than Transaction Scripts and is less complex than Domain Model. It works nicely  by playing to the stringths of the relational databse and representing a reasonable factoring of the domain logic.</p>
+
+<h2>Down to the Database Layer</h2>
+
+<p>Since we decided that the Table Module has the better approach for our enterprise application we have to choose how to connect to our data source.
+To connect to the database using the Table Module pattern we can choose the Table Data Gateway, where we will hava an object that acts as a gateway to a database table. You usually don&rsquo;t need any of the other O/R mapping patterns in this context.</p>
+
+<h2>The Presentation Layer</h2>
+
+<p>In many ways the presentation is relatively independent of the choice of the lower layers. You just have to care if you will provide a rich client interface or a HTML browser interface. A rich client will give you a nicer UI, but will usually take more effort to program, but that&rsquo;s because they tend to be more sophisticated. If you go the HTML route, you have to decide how to structure your application, the better approach is using the Model View Controller pattern, as the underpinning for your design.</p>
+
+<h2>Some Technology-Specific Advice</h2>
+
+<p>In this chapter the author also gives some technology specific tips, most for J2EE and .NET. To the java people, the main point is that you don&rsquo;t need EJBs to build a great enterprise application, you can do it just using POJOs and JDBC, since J2EE provides great design alternatives. In the .NET world, the hype is all about Web services, but he says that there&rsquo;s no real reason to make the Web server and the domain logic into separate processes in a .NET application, it&rsquo;s better to use a pattern like Remote Facade.</p>
+
+
+  <section class="meta">
+    <h3>Discussion, links, and tweets</h3>
+    <section class="copy">
+      <a href="https://twitter.com/thiagopnts">
+        <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="80" width="80" />
+      </a>
+
+      <p>
+          I'm a Software Engineer Intern which among one line of code and a cup of coffee likes to listen to music and disagree with people. </br>
+          Feel free to send me a <a href="mailto:thiagopnts@gmail.com">email</a>. </br>
+          I'm <a href="https://twitter.com/thiagopnts">@thiagopnts</a> on Twitter. </br>
+          I'm <a href="http://git.io/thi">thiagopnts</a> on Github. </br>
+          You can find me on <a href="http://facebook.com/thiagopnts">Facebook</a> and <a href="http://www.linkedin.com/profile/view?id=82767657">Linkedin</a>.
+      </p>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-count="true" data-via="thiagopnts">Tweet</a>
+      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+      <a href="http://twitter.com/thiagopnts" class="twitter-follow-button" data-show-count="false">Follow @thiagopnts</a>
+      <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+      <div class="fb-like" data-href="http://thiagopontes.net/posts/enterprise-patterns-part8" data-send="false" data-width="450" data-show-faces="true"></div>    
+      <div class="fb-comments" data-href="http://thiagopontes.net/posts/enterprise-patterns-part8" data-num-posts="5" data-width="500"></div>    
+    </section>
+  </section>
+</section>
+
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18026195-3']);
+      _gaq.push(['_setDomainName', 'thiagopontes.net']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+
+</html>

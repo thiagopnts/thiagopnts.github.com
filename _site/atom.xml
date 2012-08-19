@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>Thiago Pontes</title>
+ <link href="http://thiagopontes.net/atom.xml" rel="self"/>
+ <link href="http://thiagopontes.net/"/>
+ <updated>2012-07-14T22:57:26-03:00</updated>
+ <id>http://thiagopontes.net</id>
+ <author>
+   <name>Thiago Pontes</name>
+ </author>
+ 
+ 
+ <entry>
+   <title>Growing OO Software, Guided by Tests - Achieving Object-Oriented Design</title>
+   <link href="http://thiagopontes.net/posts/growing-OO-software-part7"/>
+   <updated>2012-07-13T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/growing-OO-software-part7</id>
+   <content type="html">&lt;p&gt;The design principles discussed in the previous chapter apply to finding the right boundaries for an object so that it work as expected, for instance, a caller wants to know what an object does and what it depends on, but not how it works.&lt;/p&gt;
+
+&lt;h2&gt;How Writing a Test First Helps the Design&lt;/h2&gt;
+
+&lt;p&gt;There are three aspects of TDD that help us achieve this design &amp;ldquo;rules&amp;rdquo;. First, starting with a test means that we have to describe what we want to achieve before we consider how. This focus helps us maintain the right level of abstraction for the target object. If the intention of the unit test is unclear then we&amp;rsquo;re probably mixing up concepts and not ready to start coding. It also helps us with information hiding as we have to decide what needs to be visible from outside the object. Seconds, to keep the unit tests understandable we have to limit their scope. Some tests are dozens of lines long, burying the point of the test somewhere in its setup. Such tests tell us that the component they&amp;rsquo;re testing is too large and needs breaking up into smaller components. And the last one, to construct an object for a unit test, we have to pass its dependencies to it, which means that we have to know what they are. This encourages context independence, since we have to be able to set up the target object&amp;rsquo;s environment before we can test it.&lt;/p&gt;
+
+&lt;h2&gt;Value Types&lt;/h2&gt;
+
+&lt;p&gt;There is a difference between Values and Objects, values are immutable, so they&amp;rsquo;re simpler and have no meaningful identity; Objects have state, so they have identity and relationships with each other. If we create a Item type that could be represented as a simple String, we can find all the code that is relevant for a change without having to chase through the code, specific types also reduce the risk of confusion, even the simplest ones, as one of the example showed, feet and metres can be represented as numbers but they&amp;rsquo;re different things.&lt;/p&gt;
+
+&lt;p&gt;There are three basic techniques for introducing value types, which we&amp;rsquo;ve called: breaking out, budding off, and bundling up.&lt;/p&gt;
+
+&lt;h3&gt;Breaking out&lt;/h3&gt;
+
+&lt;p&gt;When we find that some code in an object is becoming too complex, its a sign that we should be implementing multiple concerns and that can be break out into other objects or helper types.&lt;/p&gt;
+
+&lt;h3&gt;Budding off&lt;/h3&gt;
+
+&lt;p&gt;When we want to mark a new domain concept in the code, we often introduce a placeholder type that wraps a single field, or maybe has no fields at all. As the code grows, we fill in more detail in the new type by adding fields and methods. With each type that we add, we&amp;rsquo;re raising the level of abstraction of the code.&lt;/p&gt;
+
+&lt;h3&gt;Bundling up&lt;/h3&gt;
+
+&lt;p&gt;When we notice that a group of values are always used together, we take that as a suggestion that there&amp;rsquo;s a missing construct. A first step might be to create a new type with fixed public fields—just giving the group a name highlights the missing concept. Later we can migrate behavior to the new type, which might eventually allow us to hide its fields behind a clean interface, satisfying the &amp;ldquo;composite simpler than the sum of its parts&amp;rdquo; rule.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Growing OO Software, Guided by Tests - Object-Oriented Style</title>
+   <link href="http://thiagopontes.net/posts/growing-OO-software-part6"/>
+   <updated>2012-07-06T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/growing-OO-software-part6</id>
+   <content type="html">&lt;p&gt;So far this book talked a lot about how to get started with the development process and how to keep going using TDD. Now it starts to focus on OO design, an important thing when you start to refactor your code, or even when you start creating mock objects, code that is easy to maintain is more valuable than code easy to write, it means that implementing a feature in the most direct way can damage the maintainability of the system. This chapter focus on how to achieve a good software design even when its become tricky.&lt;/p&gt;
+
+&lt;h2&gt;Designing for Maintainability&lt;/h2&gt;
+
+&lt;p&gt;With TDD we grow our systems slice by slice, as the code scales up, the only way we can continue to understand and maintain it is refactoring the code and structuring the functionality into objects, packages and etc. There is two principal heuristics to guide this approach:&lt;/p&gt;
+
+&lt;h3&gt;Separation of concerns&lt;/h3&gt;
+
+&lt;p&gt;When we have to change the behavior of a system, we want to change as little code as possible. If all the relevant changes are in one area of code, we don&amp;rsquo;t have to hunt around the system to get the job done, to achieve this we gather together code that will change for the same reason.&lt;/p&gt;
+
+&lt;h3&gt;Higher levels of abstraction&lt;/h3&gt;
+
+&lt;p&gt;The best way for humans to deal with complexity is avoid it by working at higher levels of abstraction, that&amp;rsquo;s why most people order food from a menu in terms of dishes, rather than detail the recipes used to create them.&lt;/p&gt;
+
+&lt;p&gt;Using this you can structure your application towards something like Cockburn’s &amp;ldquo;ports and adapters&amp;rdquo; architecture, in which the code for the business domain is isolated from its dependencies on technical infrastructure, such as databases and user interfaces.&lt;/p&gt;
+
+&lt;h2&gt;No And&amp;rsquo;s, Or&amp;rsquo;s, or But&amp;rsquo;s&lt;/h2&gt;
+
+&lt;p&gt;Every object should have a single, clearly defined responsibility; this is the &amp;ldquo;single responsability&amp;rdquo; principle, when implementing something this principle helps us decide whether to extend an existing object or create a new one. The heuristic here is that we should be able to describe what an object does without using any &amp;ldquo;and&quot;s or &quot;or&quot;s, if find ourselves using this conjunctions, this object probably needs to be broken up into other objects.&lt;/p&gt;
+
+&lt;h2&gt;Composite Simpler Than the Sum of Its Parts&lt;/h2&gt;
+
+&lt;p&gt;All objects in a system are composed of other objects, except for the primitive types built into the language(in some languages even the &amp;ldquo;primitive&amp;rdquo; types are objects). When composing objects into a new type, we want the new type to exhibit simpler behavior than all of its component parts considered together. The composite object&amp;rsquo;s API must hide the existence of its component parts and the interactions between them, and expose a simpler abstraction to its peers, so, the API of a composite object should not be more complicated than any of its components.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Setting up a Ruby on Rails Development Environment on Ubuntu 12.04</title>
+   <link href="http://thiagopontes.net/posts/setup-ror-env"/>
+   <updated>2012-07-02T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/setup-ror-env</id>
+   <content type="html">&lt;p&gt;Yesterday I had to set up a linux machine twice to develop somethings with ruby and rails and in the first time I did it I got some issues with dependencies and stuff, so I decided to make this post to register the steps here :)
+I hope this become useful for other people too.&lt;/p&gt;
+
+&lt;p&gt;First, we need to install some things for ruby and development in general, this includes git, build tools, native libs for the dbs gem, and a nice text editor:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ sudo apt-get -y install build-essential zlib1g-dev libssl-dev libreadline-dev libyaml-dev libcurl4-openssl-dev curl git-core vim python-software-properties libpq-dev libsqlite3-dev libmysql-ruby libmysqlclient-dev&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Then we install rvm to manage our rubies with the latest version of ruby:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ curl -L https://get.rvm.io | bash -s stable --ruby&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;RVM has a nice command called requirements that you can run to install any missing dependencies to run it properly:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ rvm requirements&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;After all this steps you should have the latest version of ruby and rubygems installed and working, and you can install rails:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;$ gem install rails&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;rsquo;s all, after that you can choose the db you want to use to start your project and install it with apt-get, enjoy your hacking!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Growing OO Software, Guided by Tests - Maintaining the Test-Driven Cycle</title>
+   <link href="http://thiagopontes.net/posts/growing-OO-software-part5"/>
+   <updated>2012-06-29T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/growing-OO-software-part5</id>
+   <content type="html">&lt;p&gt;This chapter is about how to keep the TDD proccess running, after we start it in our projects. This, and the other chapters are all about how to write tests as we build the system, how we use tests to get early feedback and how we ensure it that the tests continue to support change and to not become an obstacle to the development team.&lt;/p&gt;
+
+&lt;h2&gt;Separate Tests That Measure Progress from Those That Catch Regressions&lt;/h2&gt;
+
+&lt;p&gt;The acceptance tests we write to describe a new feature and serves as a feedback, once passing, the acceptance test now represent a completed feature and should not fail again, but if it fails, it means that there is a regression, which means that you broken existing code.
+We should organize the test suites to reflect different roles, unit and integration tests to support the development team(this tests should run quickly and should always pass), acceptance tests for completed features(to catch regressions and should always pass too, although they might take longer to run) and new acceptance tests represent work to do, and should not pass until the feature is fully implemented.&lt;/p&gt;
+
+&lt;h2&gt;Start Testing with the Simplest Success Case&lt;/h2&gt;
+
+&lt;p&gt;We should start by testing the simplest success case. Once working we&amp;rsquo;ll have a better idea of the real structure of the solution and can prioritize between handling any possible failures we noticed along the way.
+The tests should be write as clear as possible to be used as an extension for documentation, so this documentation can be used by the development team.&lt;/p&gt;
+
+&lt;h2&gt;Develop from the Inputs to the Outputs&lt;/h2&gt;
+
+&lt;p&gt;We start developing a feature by considering the events coming into the system that will trigger the new behavior.The end-to-end tests for the feature will simulate these events arriving. At the boundaries of our system, we will need to write one or more objects to handle these events. It&amp;rsquo;s tempting to start by unit-testing new domain model objects and then trying to hook them into the rest of the application. It seems easier at the start but we’re more likely to get bitten by integration problems later. We will have wasted time building unnecessary or incorrect functionality, because we weren&amp;rsquo;t receiving the right kind of feedback when we were working on it.&lt;/p&gt;
+
+&lt;h2&gt;Unit-Test Behavior, Not Methods&lt;/h2&gt;
+
+&lt;p&gt;We all know that high test coverage does not guarantee a codebase that is easy to work with. We do better when we focus on the fatures that the object under test should provide, each of which may require collaboration with other objects, we need to know how to use the class to achieve a goal, which means the objects behavior should be right, and not the lines of code, because you could write some code without fully understand the problem and you will end up with a passing test for a wrong idea.&lt;/p&gt;
+
+&lt;h2&gt;Turning the Cycle&lt;/h2&gt;
+
+&lt;p&gt;How much unit testing should we do, using mock objects to break external dependencies, and how much integration testing? It depends too much on the context of the team and its environment. The best we can get from the testing part of TDD (which is a lot) is the confidence that we can change the code without breaking it: Fear kills progress. The trick is to make sure that the confidence is justified. So we observe to see how TDD is working for us and adapt it to our testing strategy.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Growing OO Software, Guided by Tests - Kick Starting the Test-Driven Cycle</title>
+   <link href="http://thiagopontes.net/posts/growing-OO-software-part4"/>
+   <updated>2012-06-22T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/growing-OO-software-part4</id>
+   <content type="html">&lt;p&gt;The entire TDD process was described in the other posts, with that we can assume we can grow the system by just slotting the tests for new features into an existing infrastructure, but what about the very first feature, before we have the infrastructure? As an acceptance test, it must run end-to-end to give us the feed back we need about the system&amp;rsquo;s external interfaces, which means we have to implement a whole automated build and deploy environments for our test cycle and this is a lot of work to do before we can even see the first test fail. Even looking weird you had to automate the build and deploy process from a nonexistent system.&lt;/p&gt;
+
+&lt;h2&gt;First, Test a Walking Skeleton&lt;/h2&gt;
+
+&lt;p&gt;It&amp;rsquo;s hard to write and pass the first acceptance test, because the architecture, the tests and the production code are all moving. One of the symptoms of an unstable development environment is that there is no obvious first place to look when something fails. We can split this into two smaller problems. First, work out how to build, deploy and test a &amp;ldquo;walking skeleton&amp;rdquo;, then use that infrastructure to write the acceptance tests for the first meaningful feature. After that, everything will be in place for test-driven development of the rest of the system.&lt;/p&gt;
+
+&lt;p&gt;But what is a Walking Skeleton? It&amp;rsquo;s a is an implementation of the thinnest possible slice of real functionality that we can automatically build, deploy, and test end-to-end, it should include just enough of the automation, the major components and communication mechanisms to allow us to start working on the first feature.&lt;/p&gt;
+
+&lt;h2&gt;Deciding the Shape of the Walking Skeleton&lt;/h2&gt;
+
+&lt;p&gt;To build the walking skeleton you will need to make high-level design decisions for you application, we can&amp;rsquo;t automate the build, deploy, and test cycle without some idea of the overall structure. We don&amp;rsquo;t need much detail yet, just a broad-brush picture of what major system components will be needed to support the first planned release and how they will communicate. The rule of thumb is that we should be able to draw the design for the walking skeleton in a few minutes on a whiteboard.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Build the walking skeleton can be a lot of work if you&amp;rsquo;re building a huge application, and it can bring the &amp;ldquo;chaos&amp;rdquo; to your application in the first steps of the software development, but as this chart shows, this will save you a lot of problems in the final steps of the development process, so it&amp;rsquo;s another tradeoff, but I believe that is better to have that chaos moment far away from the deadline date.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tddchart.png&quot;/&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Growing OO Software, Guided by Tests - An Introduction to the Tools</title>
+   <link href="http://thiagopontes.net/posts/growing-OO-software-part3"/>
+   <updated>2012-06-13T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/growing-OO-software-part3</id>
+   <content type="html">&lt;p&gt;The book is about techniques to guide the development of OO software using tests, and it&amp;rsquo;s not about specific technologies, but to demonstrate some techniques in action the book uses some technologies, such as JUnit 4, Hamcrest and jMock2 frameworks.&lt;/p&gt;
+
+&lt;h2&gt;A Minimal Introduction to JUnit 4&lt;/h2&gt;
+
+&lt;p&gt;I believe that everybody that got an OO course, has some experience with JUnit framework, in this section we can see some features this framework provide for us, such as expected exceptions and test fixtures.&lt;/p&gt;
+
+&lt;h3&gt;Expecting Exceptions&lt;/h3&gt;
+
+&lt;p&gt;The @Test annotation supports an optional parameter &lt;code&gt;expected&lt;/code&gt; that declares that this test case expect an exception, with this the test fails if it doesn&amp;rsquo;t throw an exception or if throws a different exception than the expected one.&lt;/p&gt;
+
+&lt;h3&gt;Test Fixtures&lt;/h3&gt;
+
+&lt;p&gt;This is a great feature but under used many times, which provides a fixed state at the start of a test, this ensures that a test is repeatable, so every time a test run it starts with the same state so it can produce the same results. A fixture must be set up before the test runs and torn down after it. The fixture is managed by the class that defines the test. JUnit use the @Before to set the things up, and @After to tear down the fixture.&lt;/p&gt;
+
+&lt;h3&gt;Hamcrest Matchers and assertThat()&lt;/h3&gt;
+
+&lt;p&gt;Hamcrest is a framework for writing declarative match criteria, it&amp;rsquo;s used by others testing frameworks such as JUnit and jMock. A Hamcrest matcher reports whether an object matches or not some criteria. In practice those matchers are used in combination with JUnit&amp;rsquo;s assertThat(), which uses matchers to say if a assertion fails. The most useful feature of Hamcrest is defining new criteria by combining existing matchers. The not() method is a factory function that creates a matcher that reverses the sense of any matcher passed to it. Matchers are designed so that when they’re combined, both the code and the failure messages are self-explanatory. The Hamcrest is also extensible, you can write your own matcher if you need.&lt;/p&gt;
+
+&lt;h3&gt;jMock2: Mock Objects&lt;/h3&gt;
+
+&lt;p&gt;jMock2 plugs into JUnit (and other test frameworks) providing support for mock objects. This framework creates mock objects dinamically, so you don&amp;rsquo;t have to write your own implementations of the types you want. The core concepts of the jMock are the mockery, mock objects and expectations. A mockery represents the context of the object under test, its neighboring objects, the mock objects stand in for the real neighbors of the object under test while it runs and a expectations decribes how the object under test should invoke its neighbors during the test.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Although the book introduce only tools from the Java world, all this kinds of frameworks can be found in all the common programming language, its good to know the first then when you need something like this in other languages you already know where to look, since most of the implementations are based on this.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Growing OO Software, Guided by Tests - Test-Driven Development with Objects</title>
+   <link href="http://thiagopontes.net/posts/growing-OO-software-part2"/>
+   <updated>2012-06-08T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/growing-OO-software-part2</id>
+   <content type="html">&lt;h2&gt;A Web of Objects&lt;/h2&gt;
+
+&lt;p&gt;The OO design focuses more on the communication between objects than on the objects themselves. An object communicates by messages: It receives messages from other objects and reacts by sending messages to other objects as well, returning a value or exception to the original sender, for instance. A system is built by creating objects and plugging them together so that they can send messages to one another.&lt;/p&gt;
+
+&lt;p&gt;When designing a system, it’s important to distinguish between values that model unchanging quantities or measurements, and objects that have an identity, might change state over time, and model computational processes. In the OO languages that we all use, the confusion is that both concepts are implemented through the same language construct, the classes. Values are immutable instances that model fixed quantities. They have no individual identity, so two value instances are effectively the same if they have the same state. This means that it makes no sense to compare the identity of two values; doing so can cause some subtle bugs. Objects, on the other hand, use mutable state to model their behavior over time. Two objects of the same type have separate identities even if they have exactly the same state now, because their states can diverge if they receive different messages in the future.&lt;/p&gt;
+
+&lt;h2&gt;Follow the Messages&lt;/h2&gt;
+
+&lt;p&gt;We can enjoy this high-level approach only if the objects used, are well designed, this means that the objects can be aesily pluggable. In practice, this means that they follow common communication patterns and that the dependencies between them are made explicit. A communication pattern is a set of rules that govern how a group of objects talk to each other: the roles they play, what messages they can send and when, and so on. In languages like Java, we identify object roles with (abstract) interfaces, rather than (concrete) classes—although interfaces don’t define everything we need to say.&lt;/p&gt;
+
+&lt;h2&gt;Unit-Testing the Collaborating Objects&lt;/h2&gt;
+
+&lt;p&gt;How can we test objects without exposing any of its internal state? One option is to replace the target object’s neighbors in a test with substitutes, or mock objects. We can specify how we expect the tested object will behave to communicate with the others mock objects for a event, this is called &amp;ldquo;Specifications Expectations&amp;rdquo;. During the test the mock objects will assert that they have been called as expected. We can use the term mockery for the object that holds the context of a test, creates mock objects, and manages expectations.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Growing OO Software, Guided by Tests - What is the point of TDD?</title>
+   <link href="http://thiagopontes.net/posts/growing-OO-software-part1"/>
+   <updated>2012-06-01T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/growing-OO-software-part1</id>
+   <content type="html">&lt;h2&gt;What is the point of Test-Driven Development?&lt;/h2&gt;
+
+&lt;p&gt;This book starts with a good citation:
+&amp;ldquo;One must learn by doing the thing; for though you think you know it, you have no certainly, until you try.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;And this happens a lot with TDD, everybody knows TDD, had heard about it somewhere, knows that use TDD is about to write the tests before everything, knows that this practice has a lot of advantages, but its hard to find someone that actually do TDD, and knows the &amp;ldquo;fundamentals&amp;rdquo;, and for many development teams write tests isn&amp;rsquo;t &amp;ldquo;real work&amp;rdquo;. Its the famous phrase: &amp;ldquo;I already finished it, just need to test&amp;rdquo;.&lt;/p&gt;
+
+&lt;h2&gt;Feedback Is the Fundamental Tool&lt;/h2&gt;
+
+&lt;p&gt;The sooner we can get feedback about any aspect of the project, the better. Many teams in large organizations can release every few weeks, some teams release every few days or even hours, which gives them an order of magnitude increase in opportunities to receive and respond to feedback from real users. With that in mind, a project organized as a set of nested feedback loops, development is incremental and iterative.&lt;/p&gt;
+
+&lt;h2&gt;Practices That Support Change&lt;/h2&gt;
+
+&lt;p&gt;We need constant testing to catch regression errors, so we can add new features without breaking the existing ones, through automated tests. Developers spend a lot of time just reading code, so the code must be readable(avoiding obscure one-liners, for example). To achieve this simplicity, we need to constantly refactor our code as we work with it, to improve and simplify its design, to remove duplication, and to ensure that it clearly expresses what it does, in this case the test suites are the feedback to our changes. TDD must be used as a design activity. We should use the tests to clarify our ideas about what we want the code to do.&lt;/p&gt;
+
+&lt;h2&gt;Test-Driven Development in a Nutshell&lt;/h2&gt;
+
+&lt;p&gt;The heart of TDD is this cycle: write a test; write some code to get it working; refactor the code to be as simple as possible. Repeat. By refactoring, you must know that, it is about changing the internal structure of an existing body of code without changing its behavior. As we develop the system, we use TDD to give us feedback on the quality of both, its implementation and design. But a project fully covered with unit tests still can be a mess, it could happen when all the unit tests are passing but the code couldn&amp;rsquo;t be integrated.
+When implementing a feature, we start by writing an acceptance test, which exercises the functionality we want to build. While it&amp;rsquo;s failing, an acceptance test demonstrates that the system does not yet implement that feature, when it passes, we&amp;rsquo;re done. This generates an inner and outer feedback loop in TDD: Write an acceptance test &amp;ndash;&gt; write a test &amp;ndash;&gt; make the test pass &amp;ndash;&gt; (write a acceptance test or refactor), write a test, etc.&lt;/p&gt;
+
+&lt;h2&gt;Testing End-to-End&lt;/h2&gt;
+
+&lt;p&gt;An end-to-end test interacts with the system only from the outside, which means, through its interface, by sending messages, by consuming web services and so on. End-to-end means more than just interacting with the system from the outside, it could be used in both, system and the process by which its built and deployed. An automated build, usually triggered by someone checking code into the source repository, will: check out the latest version; compile and unit-test the code; integrate and package the system; perform a production-like deployment into a realistic environment; and, finally, exercise the system through its external access points. This sounds like a lot of effort, but has to be done anyway repeatedly during the software’s lifetime.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Putting the Domain Model to Work</title>
+   <link href="http://thiagopontes.net/posts/domain-driven-design-part1"/>
+   <updated>2012-05-24T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/domain-driven-design-part1</id>
+   <content type="html">&lt;p&gt;Today I started to read this book, it&amp;rsquo;s about domain driven development, and it has a lot of good advices about development and how to build something useful in the best way possible.&lt;/p&gt;
+
+&lt;h2&gt;Crunching Knowledge&lt;/h2&gt;
+
+&lt;p&gt;Software development it&amp;rsquo;s not about computers or code, it&amp;rsquo;s always about something else. For instance, when developing software for green peace to map all the area cleared, your software is about ecology, so how can you code for something you don&amp;rsquo;t understand? You have to learn about the domain, and how to apply this knowledge when creating your models.
+The first thing I learned was that your models will carry all the bussiness logic from your software(ok everyone knows that), but the new thing here is about the &amp;ldquo;conception&amp;rdquo; stage, don&amp;rsquo;t using the &amp;ldquo;find the nouns&amp;rdquo; way of finding your models. Remeber you have to build this without know(yet) about the domain, so you will have to do this with the bussiness expert, usually is your client, which don&amp;rsquo;t understand about software development, so you have to create your models in a way that your client understands it too, he will use specific words from his area, which you will have to learn, after sometime you and the business expert will start to understand each other.
+In the end your models will be code this way, and with some guidance, you can even show some code to him for validation. There is were the beauty is. And this &amp;ldquo;crunching knowledge&amp;rdquo; as the author says, is one of the most cool things in software development. As a software engineer, you could work with all kind of things, in all areas, because everything needs a software.&lt;/p&gt;
+
+&lt;h2&gt;Communication and the Use of Language&lt;/h2&gt;
+
+&lt;p&gt;On a project without a common language, developers have to translate for domain experts, and this translations ends turning into bottle necks, because developers tends to create abstractions that support their design but are not understood by the domain experts, and developers working on different parts of the problem work out their own design concepts and ways of describing the domain. A project faces serious problems when its language is fractured.
+A solution is to use a &amp;ldquo;model-based&amp;rdquo; language, which should be used among developers to describe not only artifacts in the system, but tasks and functionality. This same model should supply the language for the developers and domain experts to communicate with each other, and for the domain experts to communicate among themselves about requirements, development planning and features.&lt;/p&gt;
+
+&lt;h2&gt;Binding Model and Implementation&lt;/h2&gt;
+
+&lt;p&gt;As the project growls, the team ends to interprete the models of the diagrams in its own way, the project becomes chaotic and all the efforts made to make good models ends worthless. Most of its lost starts when the code begins, when developers are forced to come up with new abstractions for what was designed by the analists and it happens because wasn&amp;rsquo;t given adequate access to domain experts for the developers.
+If the design, or some central part of it, does not map to the domain model, that model is of little value, and the correctness of the software is suspect. At the same time, complex mappings between models and design functions are difficult to understand and, in practice, impossible to maintain as the design changes. A deadly divide opens between analysis and design so that insight gained in each of those activities does not feed into the other.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Putting It All Together</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part8"/>
+   <updated>2012-05-19T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part8</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chapter 8 &amp;ndash; Putting It All Together&lt;/h2&gt;
+
+&lt;p&gt;This post is like a summary of the other posts, here we will sweep everything together and start to answer the tricky question of what patterns to use when designing an enterprise application, the advice here is one that we already gave in the other posts, use this advice to prod your thinking, but don&amp;rsquo;t use it as a replacement for your thinking. Even if you don&amp;rsquo;t like the full story of extreme programming, you should still consider this three technical practices: continous integration, test driven development and refactoring.&lt;/p&gt;
+
+&lt;h2&gt;Starting with the Domain Layer&lt;/h2&gt;
+
+&lt;p&gt;The start of the process is deciding which domain logic approach to go with. The three main contenders are Transaction Script, Table Module and Domain Model. As said in the post that describe this patterns, to choose between them you have to consider the complexity of your domain logic, something that is hard to quantify and qualify in the beginning of the project, but there is other factors in the decision, in particular, the difficulty of the connection with a database. The simplest of the three patterns(Transaction Script), fits with the procedural model that most people are still comfortable with, which is easy to build on top of a relational database. However as your logic gets more complicated your difficulties multiply exponentially.&lt;/p&gt;
+
+&lt;p&gt;Other option is the Domain Model pattern. The biggest difficult is to learning how to use a domain model. This pattern requires skill if it&amp;rsquo;s to be done well, done poorly it&amp;rsquo;s a disaster. The second big fault of a Domain Model is its connection to a relational database. But for many, mostly nontechnical, reasons an object database isn&amp;rsquo;t a possible choice for a enterprise application.&lt;/p&gt;
+
+&lt;p&gt;The Table Module represents an attractive middle ground between these poles. It can handle domain logic better than Transaction Scripts and is less complex than Domain Model. It works nicely  by playing to the stringths of the relational databse and representing a reasonable factoring of the domain logic.&lt;/p&gt;
+
+&lt;h2&gt;Down to the Database Layer&lt;/h2&gt;
+
+&lt;p&gt;Since we decided that the Table Module has the better approach for our enterprise application we have to choose how to connect to our data source.
+To connect to the database using the Table Module pattern we can choose the Table Data Gateway, where we will hava an object that acts as a gateway to a database table. You usually don&amp;rsquo;t need any of the other O/R mapping patterns in this context.&lt;/p&gt;
+
+&lt;h2&gt;The Presentation Layer&lt;/h2&gt;
+
+&lt;p&gt;In many ways the presentation is relatively independent of the choice of the lower layers. You just have to care if you will provide a rich client interface or a HTML browser interface. A rich client will give you a nicer UI, but will usually take more effort to program, but that&amp;rsquo;s because they tend to be more sophisticated. If you go the HTML route, you have to decide how to structure your application, the better approach is using the Model View Controller pattern, as the underpinning for your design.&lt;/p&gt;
+
+&lt;h2&gt;Some Technology-Specific Advice&lt;/h2&gt;
+
+&lt;p&gt;In this chapter the author also gives some technology specific tips, most for J2EE and .NET. To the java people, the main point is that you don&amp;rsquo;t need EJBs to build a great enterprise application, you can do it just using POJOs and JDBC, since J2EE provides great design alternatives. In the .NET world, the hype is all about Web services, but he says that there&amp;rsquo;s no real reason to make the Web server and the domain logic into separate processes in a .NET application, it&amp;rsquo;s better to use a pattern like Remote Facade.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Distribution Strategies</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part7"/>
+   <updated>2012-05-11T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part7</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chapter 7 &amp;ndash; Distribution Strategies&lt;/h2&gt;
+
+&lt;p&gt;This chapter is about object distribution, it&amp;rsquo;s like when you need to run different services in different boxes, this services can be objects, or a set of objects running in different machines, this improves performance because if one box component gets too busy we can add extra boxes for it, using a load balancer. In this chapter we learn why this architecture sucks, and what to do when we need a distribuited architecture.&lt;/p&gt;
+
+&lt;h2&gt;Remote and Local Interfaces&lt;/h2&gt;
+
+&lt;p&gt;The primary reason that the distribuition in boxes doesn&amp;rsquo;t work has to do with a fundamental fact of computers. A procedure call within a process is very fast. A procedure call between two separate processes is orders of magnitude slower. Make that a process running on another machine and you can add another order of magnitude or two, depending on the network. This means that the interface for a remote object should be different from a local one. For instance, in a local object, we create an interface for it to access each class' fields individually, through gets and sets, but in a remote object we will want to set all the field with just one request, and not individually as the local object interface approach, the remote approach focus on minimizing the calls, instead flexibility and extendibility. As we said before that putting each service in a box it&amp;rsquo;s not good, this is because that you will have another bottle neck when sending messages to the remote objects. A good solution is use clustering, which means run all the services locally and run other instances on multiple nodes.&lt;/p&gt;
+
+&lt;h2&gt;Working with the Distribution Boundary&lt;/h2&gt;
+
+&lt;p&gt;As you design your system you try to keep everything locally in a single process, but if you end up needing to distribute something you can isolate this objects and create an interface to use it, this interface will act like a facade for the distributed objects, this is a pattern called Remote Facade. Using a Remote Facade helps minimize the difficulties that the remote interface introduces. This way only the objects that really need a remote service will get the different interface, and this facade can mime a local interface for the other developers. Another known pattern is the Data Transfer Object, it&amp;rsquo;s used when you not only need to invoke remote methods, but when you need to transfer objects too. This is normally used when you have different processes running, because this pattern acts like the channel between the process to share the object.&lt;/p&gt;
+
+&lt;h2&gt;Interfaces for Distribution&lt;/h2&gt;
+
+&lt;p&gt;When this book was written, the interfaces for distributed components have been based on remote procedure calls, but today we see a lot of interfaces based on XML/JSON over HTTP, it&amp;rsquo;s the famous REST interfaces. This is a handy approach for several reasons, it easily allows a  lot of data to be sent, in structured form, in a single roundtrip. Since remote calls need to be minimized, this is a good thing. Another good thing is that all common programming languages has XML/JSON parses so different plataforms can interact between, through it.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Always keep everything together when possible, but when you have to distribute it through multiple processes, you can keep the system clean creating an remote interface for the services that need make/receive remote calls and other interface for the local object to keep everything simple using regular OO. As you saw you can do it easily nowadays using REST.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Session State</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part6"/>
+   <updated>2012-05-02T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part6</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chapter 6 &amp;ndash; Session State&lt;/h2&gt;
+
+&lt;p&gt;This chapter talks about session states, it&amp;rsquo;s interesting because I had some problems with this recently in a project I&amp;rsquo;m developing in the university. I think that if I had read this chapter before it, it could had saved me a couple hours of researching. But, as everything in life, the mistakes served to go deeper in the subject.&lt;/p&gt;
+
+&lt;h2&gt;The Value of Statelessness&lt;/h2&gt;
+
+&lt;p&gt;So, what is stateless? An object has behavior and different states, so a true stateless object should be an object without states, it means no fields. But an object like this is awkward, however, this isn&amp;rsquo;t what most people mean when they talk about statelessness. When people refer to a stateless server they mean an object that doesn&amp;rsquo;t retain state between requests. An object may have fields, but when you invoke a method on a stateless server the values of the fields are undefined. An example could be a server that returns a web page telling you all about a book, you invoke it by accessing an URL, in the URL you supplu an ISBN number that the server uses to generate the HTTP response based on a database query to retrieve the object from db and show it to the user in a HTML page, once the job is done, these values become useless and don&amp;rsquo;t influence to the state of the object. But what if you want to keep track of all ISBN viewed by some determined client IP? You gonna need an object that persist between requests, this should be a stateful object. This is a very costly approach, since statelessness fits better in the web(HTTP is a stateless protocol). With a stateless object server you can implement stateful objects, to keep a session state. This session state acts like a transaction and need to be committed to become record data. But we can have consistency problems as describe in the other post about concurrency if the same object has his state changed by two different sources. So, to store session state without losing the correct behavior we can use some patterns to help with it, as we will see below.&lt;/p&gt;
+
+&lt;h2&gt;Client Session State&lt;/h2&gt;
+
+&lt;p&gt;This pattern has a simple idea, just store the session state on the client. It&amp;rsquo;s how the cookies works, there are other several ways to do that, for instance, you can serialize the data into some hidden field on a web form(I always thought this was a ~gambiarra~ lol is there an equivalent to gambiarra in english? but I know there are some cases this could be used, like rails does I guess) or you can hold the data in a object on a rich client, which has been a good approach with JS mainly front-end apps. The problem with the cookies approach is that you are limited with the cookie&amp;rsquo;s size, other problem is that cookies only works with a single domain, so if your site  is separeted into different domain names the cookies won&amp;rsquo;t travel between them. The main disadvantage of using cookies is when you have to work with a large amount of data, because it has to be transferred in every request. There is also a security issue, all the data transferred through cookies can be sniffed and spoofed/changed.&lt;/p&gt;
+
+&lt;h2&gt;Server Session State&lt;/h2&gt;
+
+&lt;p&gt;This approach is to keep the session state on the server&amp;rsquo;s memory, or in a file on the file system or even in a single table in a database. You can have a kind of map in memory to hold the session ID and the session object can be retrieve from the map to process the request, obviously this consumes a lot of memory. To solve this problem you can serialize the object for a persist store, avoid loosing the object in case that some thing accur with the memory. Other way is creating a table to store the sessions indexed by the session ID, using this approach you will have to worry with the performance if your system have to handle a lot of clients simultaneously. Because it&amp;rsquo;s simplicity, this pattern has been implemented by default in several application servers.&lt;/p&gt;
+
+&lt;h2&gt;Database Session State&lt;/h2&gt;
+
+&lt;p&gt;This is another server-side storage approach, but it involves break the data into tables and fields and storing it like you would store common database entities. The data involved is typically a mix of session data that&amp;rsquo;s only local to the current interaction and committed data that&amp;rsquo;s relevant to all interactions. One of the key issues to consider here is the fact that session data is usually considered local to the session and shouldn&amp;rsquo;t affect other parts of the system until the session as a whole is committed. The advantage here is the gain in performance, you will be using stateless objects on the server, thus enabling pooling and easy clustering. However, you&amp;rsquo;ll pay with the time needed to pull the data in and out of the database.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Concurrency</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part5"/>
+   <updated>2012-04-25T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part5</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chapter 5 &amp;ndash; Concurrency&lt;/h2&gt;
+
+&lt;p&gt;This chapter talks about concurrency, one of most tricky parts of software development. It don&amp;rsquo;t pretend to give a general treatment of concurrency(for that it could need at least a book), but it introduces concurrency issues for enterprise application development. Once its done with the brief introduction about concurrency, we will start to talk about the patterns for handling concurrency. All the problems here discussed can be imagined like the problems that a control version tool deal.&lt;/p&gt;
+
+&lt;h2&gt;Concurrency Problems&lt;/h2&gt;
+
+&lt;p&gt;The essential problems of concurrency are the problems that concurrency control systems try to prevent. The bigger problem here is that these system often create a new set of problems in their solutions. The First and simplest problem is called Lost updates. It happens, for instance, when someone is editing one file, then someone else starts to edit the same file and finish it before the first one, so the first one don&amp;rsquo;t get the changes made by the other, and when he save his version will be write over the other version, updated early. The other problem is a inconsistent read. It occurs when you read two things that are correct pieces of information but not correct at the same time. For instance, if you read a value from A and then read a value from B to get a value C, if the A&amp;rsquo;s value change while you are reading the B&amp;rsquo;s value, your C value will be incorrect. Since the concurrency problems have been around for a while there are various solutions. For enterprise applications two solutions are particularly important: isolation and immutability. The problems accur when two active agents has access to the same data, one workaround here is data isolatio, partitioning the data so that any piece of it can only be accessed by one agent. This technique is used by operating systems to manage the memory used by processes. But what if we can&amp;rsquo;t isolate all the mutable data? Then we have two approachs: optimistic and pessimistic concurrency control.&lt;/p&gt;
+
+&lt;p&gt;Using the optimistic locking Bob and Alice can edit the same file freely and the first one to finish can save it, and when the second one finish it&amp;rsquo;s commit will be rejected and it comes to how wrote it to to figure out what to do to merge then. With the pessimistic locking whoever checks out the file first prevents anyone else from edit it. This approach can generate a deadlock since the other process who wants to access some locked resource can stay waiting forever and goes to starvation. A good way to think about it is that an optimistic lock is about conflict detection while a pessimistic lock is about conflict prevention.&lt;/p&gt;
+
+&lt;h2&gt;Other approachs for handling concurrency problems&lt;/h2&gt;
+
+&lt;p&gt;If your locking strategy requires that an object be loaded in order to be locked, such as in the optimist lock, locking a large group affects performance, and with the pessimistic lock a large lock set is a management headache and increases lock table contention. A Coarse-Grained Lock allows you to manage the concurrency of a group of objects together in a single lock without having to load all the members of the group in order to lock them. Other way is using the Implicit Lock, which saves the developer from having to manage locks directly, since one line that a developer forget to lock something can break the entire application, so you let the lock for your application framework.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Web Presentation</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part4"/>
+   <updated>2012-04-18T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part4</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chapter 4 &amp;ndash; Web Presentation&lt;/h2&gt;
+
+&lt;p&gt;This chapter talk about the presentation layer, which is in the currently days mostly web browser based user interfaces. This bring a lot of advantages: no client software to install, a common UI approach, easy universal compatibility with browsers(sic), and it&amp;rsquo;s more easy and beautiful to develop then desktop UIs(IMO).
+Here we will discuss three main view patterns: Template View, Transform View and Two Step View.&lt;/p&gt;
+
+&lt;h2&gt;Template View Pattern&lt;/h2&gt;
+
+&lt;p&gt;This is the most common approach to build a web page with dynamic content, the basic idea is to embed markers into a static HTML page when it&amp;rsquo;s written and when it is served as a response for a request it is markers are replaced for computed content, such as a database query. This way the page can show different contents based on previous computation. As a lot of tools use this pattern, the important here isn&amp;rsquo;t how to build something using this pattern but to understand how it works and use it. To embed the markers just pick a tool, see the docs and start coding. Currently there are a lot of template engines out there, such as mustache, jinja2, etc. The most popular forms are with PHP, JSP and ASP like server pages. This approach go further then than the basic form, they allow you to embed arbitraty programming logic, called scriptlets, into the page. Obviously it isn&amp;rsquo;t recommended, since your page becomes incomprehensible for non-programmers and it is a problem when you have to work with designers, other problem is that you starts to mix the application layers and everything will become a mess. A good advice the author gives to avoid scriptlets in the server page is using a Helper Object which containts all the real programming logic. One thing to watch in Template Views is exceptions, if one exception occurs while processing the server page you will have a half processed page that provides decidedly odd output, you can look at how your web server handles exceptions and depending you can catch all with the helper object.&lt;/p&gt;
+
+&lt;h2&gt;Transform View Pattern&lt;/h2&gt;
+
+&lt;p&gt;The main idea here is that the data is requested and is provided by a data source layer through a domain model, but the data isn&amp;rsquo;t formatted to make a a proper web page, using the Transform View means thinking of this as a transformation where you have the model&amp;rsquo;s data as input and the HTML as the output. A Tranform View is organized around separete transforms for each kind of input element. The tranform is controlled by something like a simple loop that looks at each input element, finds the appropriate transform for that element and then calls the transform on it. This remember me JSON parsers, you input an object and it parses it to JSON. The author uses an XML example to illustrate this example, which was the most common approach when the book was written. The choice between a Transform View and a Template View depends on the team, although the Template View be more used, the Transform View pattern is more portable since you can use the JSON/XML generate as output in any other platform such as Java or .NET.&lt;/p&gt;
+
+&lt;h2&gt;Two Step View Pattern&lt;/h2&gt;
+
+&lt;p&gt;When making global changes to the pages appearance becomes hard you can start to think to use the Two Step View Pattern. This pattern deals with this problem by splitting the transformation into two stages, the first on transforms the model data into a logical presentation without any specific formatting, the second converts that logical presentation with the actual formatting needed, this way you can make global changes just adjusting the second stage. With a single stage view approach(such sd the other patterns discussed here) you build a one view module per web page, with a two stage view you have one stage for the model and other for the entire application. Your pay-off is that any changes to the appearance of the site in the second stage is much easier to make, since one second-stage change affects the site as a whole. The pattern isn&amp;rsquo;t good for design-heavy sites, where each page is supposed to look different because it&amp;rsquo;s hard to find what can be used in the second stage. Other disadvantage is that there isn&amp;rsquo;t some many tools to help non-programmers use this approach like the Template View has, so it become hard to use in a team with designers.&lt;/p&gt;
+
+&lt;h2&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;I believe most of us use a Template View framework in our day to day work and is already used to it, but its good to know there is other ways to deal with view rendering and stuff, and how this works internally, because how knows when you gonna need use something like this?&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Mapping to Relational Databases</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part3"/>
+   <updated>2012-04-11T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part3</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chapter 3 &amp;ndash; Mapping to Relational Databases&lt;/h2&gt;
+
+&lt;p&gt;I particularly liked this chapter more then others, not because of the patterns described in this section(there is a lot of them) but how it describes the how and why there are some problems with creating/using an ORM, while reading this chapter you can identify several patterns cited through the text and think like &amp;lsquo;wow, the way hibernate/activerecord/blah approachs data manipulation is a pattern called X&amp;rsquo; and see the work arounds it does to deal with common object oriented practices like inheritance that mess up and are unviable to simulate/map in relational databases due normalization. This chapter also gave me a more deep view about relational databases, since my experience is most with the nosql ones, since I always have avoided sql and its third party functions(which I always forget) as much as I can. So for this chapter I will focus on the problems(and its alternatives) for this layer.&lt;/p&gt;
+
+&lt;h2&gt;The Behavioral Problem&lt;/h2&gt;
+
+&lt;p&gt;When we think in OR mapping the first thing that comes to mind is how the classes are mapped to tables and how to relate it. If you load several objects in the memory and modify them you hae to keep track of which ones you have modified and make sure to write all of them back out to the database, this gets more and more harder when dealing with several objects, as you read and modify them you have to ensure that the database state you&amp;rsquo;re working stays consistent, so if the object X is already in memory you can&amp;rsquo;t pull out the same row again and modify it. The pattern used to solve this problem is called &amp;lsquo;Unit of Work&amp;rsquo;. It keeps track of all objects read from the database together, it also handles how updates are made to the database, instead of the programmer call some save method it tells the unit of work to commit the changes(it remember me hibernate). This pattern also takes care about the problem of loading the same row twice, each time you read some data, you check if this data are already in the memory, to help with this task there is another pattern called &amp;lsquo;Identity Map&amp;rsquo;, it&amp;rsquo;s to ensure the uniqueness from data in memory and should not be used as cache or to improve performance, but this approach leads to other problem, in the OOP it&amp;rsquo;s normal to have have several objects which interacts with others, this interaction can be called object graph and as the models complexity grows the graph grows as well and when you try to pull this from the database what comes to you is a bunch of joined tables, which can turn in a bottle neck in the system, so there is another approach when it becomes a problem: The Lazy Load pattern. It is a object that doesn&amp;rsquo;t have all the data, but knows how to get it if you need just keeping references, it acts like a pointer, so it avoid loading unnecessary data in the memory.&lt;/p&gt;
+
+&lt;h2&gt;Mapping Relationships&lt;/h2&gt;
+
+&lt;p&gt;The biggest problem here is how objects and relations handle links, which lead to two problems, the first is that there is a difference in representation, objects handle links by storing references that are held by, for instance, memory addresses, but relational databases handle links by forming a key in another table. The second problem is that objects can easily use collections to handle multiple references from a single field, while normalization forces all relation links to be single valued, this leads to reversals of the data structure between objects and tables. If an object has a collection, you need a query to find all the rows that link to the id of the object and it gets worse when you have to add or remove from collections. The pattern used for inter-object references is the &amp;lsquo;Identity Field&amp;rsquo;, which is simply keep the row&amp;rsquo;s primary key as an attribute in the object, so you can easily access it&amp;rsquo;s row.&lt;/p&gt;
+
+&lt;h2&gt;Inheritance&lt;/h2&gt;
+
+&lt;p&gt;This is another kind of hierarchy scheme that causes relational databases headaches, since there is no standard way to do inheritance in SQL this kind of relationship needs to be mapped too. For any inheritance structure there are basically three options. You can have one table for all the classes(Single Table Inheritance pattern), one table for each concrete class(Concrete Table Inheritance pattern), or one table per class in the inheritance hierarchy(Class Table Inheritance pattern). The trade-offs of this approachs are all related to data duplication and speed of access. In the first case the biggest downside is the wasted space, since each row has to have columns for all possible subtypes and this leads to empty columns. The second one avoids the joins allowing you to pull an object from one table, but if one super class changes you have to remember to update all the other tables which inherits from it. The third one is the simplest solution, but it needs multiple joins to load a single object, and too many joins reduces performance. There is no best solution here, you have to analyze your situation and pick the best fit.&lt;/p&gt;
+
+&lt;p&gt;I still want to talk about Metadata, DB Connections and other interesting points from this chapter, so I will split this post in two and talk about this in the next one.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Organizing Domain Logic</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part2"/>
+   <updated>2012-04-04T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part2</id>
+   <content type="html">&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;h2&gt;Chapter 2 &amp;ndash; Organizing Domain Logic&lt;/h2&gt;
+
+&lt;p&gt;This chapter describe several ways for how to organize the domain logic and it relies into three primary patterns: Transaction Script, Domain Model and Table Module. Describing each approach and its biggest advantages and disadvantages, and showing how it interacts using other patterns like Gateway, RecordSet and Data Mapper.&lt;/p&gt;
+
+&lt;h2&gt;Transaction Script Pattern&lt;/h2&gt;
+
+&lt;p&gt;The simplest approach to organize domain logic is using the Transaction Script, this pattern is essentially a procedure that takes the input from the presentation, processes it with validations and stores in the database. It then replies with data to the presentation layer. The fundamental organization is of a single procedure for each action that a user might want to do. You can use classes instead of procedures to use this pattern in an object-oriented fashion. The most common is to have several Transaction Scripts in a single class, where each method defines a subject area of related Transational Scripts. To identify the TSs you can think as each database transaction can be turned into a TS. The biggest advantage is its simplicity, organizing logic this way is good for applications with only a small amount of logic, this helps keeping the code clean and understandable, but increasing the complexity a amount of logic it keeps hard to keep it in a well-designed state, other problem to beware is the code duplication that could happen since the transaction seems to be fairly similar. When the domain logic gets more complex its time to use the Domain Model pattern.&lt;/p&gt;
+
+&lt;h2&gt;Domain Logic Pattern&lt;/h2&gt;
+
+&lt;p&gt;This pattern has an OO style(which can be implemented as an Entity Bean in J2EE apps), it divides the logic into objects, in the simplest form, it looks like one object for each database table. A rich Domain Model can look different from the database design, with inheritance, strategies and other patterns, this approach is better for a more complex logic but its more harder to map to the database. A good ideia is to use a simple domain model with the Active Record pattern and the Data Mapper pattern for the complex ones. Since the bussiness logic can change, it&amp;rsquo;s importante to be able to modify, build, and test this layer easily, so you&amp;rsquo;ll want the minimum of coupling from the domain to other layers. A common concern is about overloading a domain object, you&amp;rsquo;ll notice that some behavior is similar to every model and it could be good to isolate it in other object. The problem is that it creates code hard to maintain, and the other developers tend to not see it in the model and duplicate the code, and the duplication can quickly lead to complexity and inconsistency. So, the advice here is to only fix the bloating in the models when, and if, it becomes a problem.&lt;/p&gt;
+
+&lt;h2&gt;Table Module Pattern&lt;/h2&gt;
+
+&lt;p&gt;One of the problems with the Domain Model pattern is the interface with relational databases, as a result is needed a lot of work to pull data in and out of the database as the complex of domain logic grows. The Table Module pattern organizes domain logic with one class per table and a single instance of a class contains the various methods to act on data. The main difference is that if with you have various objects using the Domain Logic pattern each one is responsible for itself, while using the table module, you will have to deal just if one instance to do the work for all the objects, it acts like a facade where you can do the CRUD and the object is unaware of the operations. This pattern gives you an interface that acts on the passed data. This pattern can be an instance with a collection of static methods, you can then use this instance to manipulate the data. The word table in the pattern name suggests that you have one Table Module per table in the database, while this is true in some cases it isn&amp;rsquo;t recommended because the structure of the Table Module doesn&amp;rsquo;t depends on the structure of the tables in the database but more on the virtual tables perceived by the applications, usually represented with some data structure resulted from some other query.&lt;/p&gt;
+
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+
+&lt;p&gt;As all things in software architecture you can choose what to use and how to use it to solve your problem, you can even use these three patterns combined if you need, as the author says, a good solution is implement the Domain Logic using Transaction Scripts on it. So it&amp;rsquo;s up to you to decide the best approach to solve your problem. Next week I will talk about the Chapter 3.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Patterns of Enterprise Application Architecture - Layering</title>
+   <link href="http://thiagopontes.net/posts/enterprise-patterns-part1"/>
+   <updated>2012-03-28T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/enterprise-patterns-part1</id>
+   <content type="html">&lt;p&gt;For this week I was asked to start to read Patterns of Enterprise Application Architecture from &lt;a href=&quot;http://martinfowler.com&quot;&gt;Martin Fowler&lt;/a&gt;, starting with the Introduction and the Chapter 1 &amp;ndash; Layering. I&amp;rsquo;ve already had used this book a couple of times for reference but never had read like this, chapter after chapter.&lt;/p&gt;
+
+&lt;h2&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/511D6FdsbXL._AA160_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;I used grow my interest in a book depending on the introduction section because it&amp;rsquo;s like an extension of the preface and the author can write more widely about all the contents of the book, showing what it has to offer and this book&amp;rsquo;s introduction is a good one. The author says more about patterns, going beyond the UML representation or code, with a pattern&amp;rsquo;s definition and other not technical benefits for who is using/know patterns, for instance if someone says &amp;ldquo;this class is a Remote Facade&amp;rdquo; and you know the pattern Remote Facade you don&amp;rsquo;t need more information about it because you already know what it is for, or if you don&amp;rsquo;t know you already know what you need to know, so design patterns creates a vocabulary about design. This section also describes how the information is organized in the book, divide in &amp;ldquo;How it Works&amp;rdquo;,&amp;ldquo;When to Use&amp;rdquo;, &amp;ldquo;Further Reading&amp;rdquo; and a implementation example, in its simplest form.&lt;/p&gt;
+
+&lt;h2&gt;Chapter 1 &amp;ndash; Layering&lt;/h2&gt;
+
+&lt;p&gt;This chapter starts talking about on how this approach works, the most know example is the TCP/IP model which the application layer is built on top of the transport layer which uses services from the layer below and so on, without know there are others layers below the one which is providing service. This give us some benefits: Turns easy to maintain several parts of the code, you can replace one layer with alternative implementations of the basic service without crashing everything.&lt;/p&gt;
+
+&lt;p&gt;On the other hand, this approach have some downsides. This layering causes some dependencies between them, for instance, if you change the API of one layer you have to change it in the layer which uses this services, and all these layers can harm performance.&lt;/p&gt;
+
+&lt;p&gt;It also presents the three principal layers, which are the presentation, responsible to displaying information, domain for the system&amp;rsquo;s logic and data source where the communication with databases, messaging systems, happens. But where you separete them depends on the complexity of your system. In systems where there are no users, the presentation is an external interface for a service your system offers. There is just a steady rule, the domain and data source should never be dependent on the presentation, this made easy to replace it for different kinds of presentations. The author also discuss about choosing where to run the presention layer(browser, sure!), putting some concerns on the UX and user needs.&lt;/p&gt;
+
+&lt;p&gt;So, that is it for the Introduction and Chapter 1, next week I&amp;rsquo;ll talk about the Chapter 2 &amp;ndash; Organizing Domain Logic.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Why you should give angular a try</title>
+   <link href="http://thiagopontes.net/posts/angularjs"/>
+   <updated>2012-03-24T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/angularjs</id>
+   <content type="html">&lt;p&gt;A few weeks ago I heard about &lt;a href=&quot;http://angularjs.org&quot;&gt;angular&lt;/a&gt;, a JavaScript MVC framework and I decide to read a little about it, when the slogan caught my attention: &amp;ldquo;What HTML would have been had it been designed for web apps&amp;rdquo;. This is because angular has a different approach compared with other JavaScript MVC frameworks(like &lt;a href=&quot;http://backbonejs.org/&quot;&gt;Backbone&lt;/a&gt; and &lt;a href=&quot;http://spinejs.com/&quot;&gt;Spine&lt;/a&gt;), with angular you can attach angular&amp;rsquo;s attributes to HTML, and they can automatically be accessed through the controller, which is a simple JavaScript function. You can attach a lot of directives(custom attributes for DOM elements), modifying the behavior of the element they are specified in. The cool thing here is the two way data bind, all changes made in the view reflects on the models and all changes on the models reflects in the view, and all this happens like magic. The other thing I liked is because it lets your code more clean and not surrounded by $() everywhere, but if you want, it works great with jQuery. It also has support to REST calls and all that stuff.&lt;/p&gt;
+
+&lt;p&gt;Angular still are on a 1.0.0rc version, but I think it&amp;rsquo;s not receiving the attention it&amp;rsquo;s deserves yet, so, if you feel interested, you really should take a look on the angular&amp;rsquo;s site and give it a try!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Hello world and The Passionate Programmer</title>
+   <link href="http://thiagopontes.net/posts/hello-world"/>
+   <updated>2012-03-21T00:00:00-03:00</updated>
+   <id>http://thiagopontes.net/posts/hello-world</id>
+   <content type="html">&lt;h2&gt;Hello world!&lt;/h2&gt;
+
+&lt;p&gt;Since one of my tasks in my internship at OfficeDrop is blog about some books I&amp;rsquo;ve been reading, I decided to start it in a new fresh blog, powered by &lt;a href=&quot;http://pages.github.com&quot;&gt;github pages&lt;/a&gt;. There is some work to do here about the layout and stuff, since mine was ~stolen~ from &lt;a href=&quot;https://github.com/holman&quot;&gt;Zach Holman&lt;/a&gt;, but I&amp;rsquo;ll do it later, I&amp;rsquo;m kinda busy right now.&lt;/p&gt;
+
+&lt;h2&gt;The Passionate Programmer&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;http://ecx.images-amazon.com/images/I/41fyjTVARFL._SL500_AA300_.jpg&quot; width=&quot;250&quot; height=&quot;250&quot;/&gt;&lt;/p&gt;
+
+&lt;p&gt;So, for this week, I was asked to read &amp;ldquo;&lt;a href=&quot;http://www.amazon.com/The-Passionate-Programmer-Remarkable-Development/dp/1934356344&quot;&gt;The Passionate Programmer&lt;/a&gt;&amp;rdquo;. This is a MUST read for any programmer, in this book, Chad Fowler lead us through 53 advices on how to make a remarkable career in software development. After each advice he says what you can do to put it in practice. I&amp;rsquo;ll list some advices I liked below and write about what each one means.&lt;/p&gt;
+
+&lt;p&gt;2 &amp;ndash; Supply and Demand: On this advice, Chad talks about demand on determined technology and how this affects your job. Simplifying, it&amp;rsquo;s like: if it&amp;rsquo;s paying well Y U NO LEARN IT? There is no space in the market for fanatics, I mean, there is but you&amp;rsquo;ll not give you a chance to evolve.&lt;/p&gt;
+
+&lt;p&gt;7 &amp;ndash; Be a Generalist: This advice tells that a programmer skills should transcend technology platforms, and not think about this like a &amp;ldquo;jack-of-all-trades but master of none&amp;rdquo;, you can(and you should) know about the development environment works, how to setup the web server, and all that stuff, because it&amp;rsquo;s all about your job.&lt;/p&gt;
+
+&lt;p&gt;8 &amp;ndash; Be a Specialist: This is one of my favorite ones, it tells to not use the word specialist as an excuse to limit your knowledge, you can&amp;rsquo;t say you&amp;rsquo;re a Java specialist just because you only know Java, to self titled yourself as a Java specialist you have to know the Java platform deeply, and not only know how to use the standard API.&lt;/p&gt;
+
+&lt;p&gt;9 &amp;ndash; Don&amp;rsquo;t Pull All Your Eggs in Someone Else&amp;rsquo;s Basket: Don&amp;rsquo;t limit yourself in your goals, Chad tells an interesting history about one of his co-workers which said his career&amp;rsquo;s goal is to be a J2EE Architect, so made a good question, what if the J2EE become obsolete? It&amp;rsquo;s the end of your career? Don&amp;rsquo;t build your career around an specific technology.&lt;/p&gt;
+
+&lt;p&gt;15 &amp;ndash; Practice, Practice, Practice: Your programming skills grows as much as you practice it. But it&amp;rsquo;s not just doing always the same thing or solving the same problems, you have to practice at your limits, try harder problems, implement harder things. You can take it to know more about your programming language of choice, know about the streams and networking libraries available, etc. It&amp;rsquo;s a win, win.&lt;/p&gt;
+
+&lt;p&gt;30 &amp;ndash; Say &amp;ldquo;No&amp;rdquo;: The idea is simple: Just say NO, when you can&amp;rsquo;t do something or when the deadline is too short, it&amp;rsquo;s better then say yes and don&amp;rsquo;t do the work, as he says &amp;ldquo;Saying yes to avoid disappointment is just lying.&amp;rdquo;&lt;/p&gt;
+
+&lt;p&gt;52 &amp;ndash; Better Than Yesterday: Just ask yourself everyday: &amp;ldquo;What can I do today to be better then yesterday?&amp;rdquo;. The awesome thing here is that it&amp;rsquo;s apply about everything in your life.&lt;/p&gt;
+
+&lt;p&gt;So, this is it for the first post.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ 
+</feed>
