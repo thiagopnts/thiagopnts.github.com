@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Domain Driven Design - Isolating the Domain
+title: Summary of Domain Driven Design - Isolating the Domain
 ---
 
 As we know, the domain is where we put the business logic and solve the problems in our software, so it is the most important part, its importance is disproportionate to its size, even in huge projects, the models still isn't the biggest part our software, so we need to isolate it from the rest of the software, but you can say "Aren't we doing that by creating models?", and the answer is yes, but we need to organize it in a way to be able to look at the elements of our model and see them as a system.

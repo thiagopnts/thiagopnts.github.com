@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Growing OO Software, Guided by Tests - Achieving Object-Oriented Design
+title: Summary of Growing OO Software, Guided by Tests - Achieving Object-Oriented Design
 ---
 
 The design principles discussed in the previous chapter apply to finding the right boundaries for an object so that it work as expected, for instance, a caller wants to know what an object does and what it depends on, but not how it works.

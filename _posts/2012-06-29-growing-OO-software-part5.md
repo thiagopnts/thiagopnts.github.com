@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Growing OO Software, Guided by Tests - Maintaining the Test-Driven Cycle
+title: Summary of Growing OO Software, Guided by Tests - Maintaining the Test-Driven Cycle
 ---
 
 This chapter is about how to keep the TDD proccess running, after we start it in our projects. This, and the other chapters are all about how to write tests as we build the system, how we use tests to get early feedback and how we ensure it that the tests continue to support change and to not become an obstacle to the development team.

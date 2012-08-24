@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Domain Driven Design - A Model Expressed in Software
+title: Summary of Domain Driven Design - A Model Expressed in Software
 ---
 
 This chapter starts with a discussion about the issues involved to design associations between objects. They are simple to conceive and draw, but implementing them always end up in problems or bad design. This part is focused on making distinctions among the three patterns of model elements that express the model: Entities, Value, Objects and Services.

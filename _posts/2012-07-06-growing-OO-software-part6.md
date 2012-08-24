@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Growing OO Software, Guided by Tests - Object-Oriented Style
+title: Summary of Growing OO Software, Guided by Tests - Object-Oriented Style
 ---
 
 So far this book talked a lot about how to get started with the development process and how to keep going using TDD. Now it starts to focus on OO design, an important thing when you start to refactor your code, or even when you start creating mock objects, code that is easy to maintain is more valuable than code easy to write, it means that implementing a feature in the most direct way can damage the maintainability of the system. This chapter focus on how to achieve a good software design even when its become tricky.
