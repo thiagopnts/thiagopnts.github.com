@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+
+<!--
+  Google HTML5 slide template
+
+  Authors: Luke Mahé (code)
+           Marcin Wichary (code and design)
+           
+           Dominic Mazzoni (browser compatibility)
+           Charles Chen (ChromeVox support)
+
+  URL: http://code.google.com/p/html5slides/
+-->
+
+<html>
+  <head>
+    <title>KSS Presentation</title>
+
+    <meta charset='utf-8'>
+    <script
+      src='js/slides.js'></script>
+    <link rel="stylesheet" href="css/custom.css" type="text/css" media="all">
+  </head>
+  
+  <style>
+    /* Your individual styles here, or just use inline styles if that’s
+       what you want. */
+    
+    
+  </style>
+
+  <body style='display: none'>
+
+    <section class='slides layout-regular template-default'>
+      
+      <!-- Your slides (<article>s) go here. Delete or comment out the
+           slides below. -->
+        
+      <article class="nobackground fill">
+        <h3>Play! + Scala</h3>
+          <p>
+            <img src="images/batman.jpeg">
+          </p>
+        <img id="logo" src="images/logo.png" height="130" width="130">
+        <h3 class="source">
+
+          Thiago Pontes
+        </h3>
+      </article>
+      
+      <article class="nobackground">
+
+        
+          <h3>Play! framework?</h3>
+        <p>
+          <img class="centered top" src='images/play_framework.png'/>
+        </p>
+        
+      </article>
+
+      <article class="nobackground">
+        <h3>
+          Play! framework?
+        </h3>
+        <p>
+          <img class="centered top" src="images/features.png"  height="350" width="750" />
+        </p>
+      </article>
+
+      <article class="nobackground fill">
+        <h3>
+          Scala?
+        </h3>
+        <ul class="shadow">
+          <li>fast</li>
+          <li>functional</li>
+          <li>expressive</li>
+          <li>statically typed</li>
+          <li>concurrent</li>
+          <li>type inference</li>
+          <li>beautiful <3</li>
+        </ul>
+        <p>
+          <img class="centered top" src="images/scaling.jpeg"   />
+        </p>
+      </article>
+
+      <article class="fill">
+        <h3>
+          Play! + Scala
+        </h3>
+        <p>
+          <img class="centered top" src="images/batman.jpeg"   />
+        </p>
+      </article>
+      
+      <article class="nobackground">
+        <h3>
+          Play! + Scala - Template Engine
+        </h3>
+        <p>
+          <img class="centered top" src="images/templating.png"   />
+        </p>
+      </article>
+      
+      <article class="fill">
+        <h3>
+          Play! + Scala - Handling Forms
+        </h3>
+        <pre class="prettyprint top">
+val userForm = Form(
+  mapping(
+    "name" -> text.verifying(required),
+    "age" -> number.verifying(min(0), max(100))
+  )(User.apply)(User.unapply)
+)
+        </pre>
+        <p>
+          <img class="centered top" src="images/batman.jpeg"   />
+        </p>
+      </article>
+
+     <article class="fill">
+        <h3>
+          Play! + Scala - Working with JSON
+        </h3>
+        <pre class="prettyprint top">
+val json = Json.parse(jsonString)
+
+val maybeName = (json \ "user" \ name).asOpt[String]
+val emails = (json \ "user" \\ "emails").map(_.as[String])
+        </pre>
+        <p>
+          <img class="centered top" src="images/batman.jpeg"   />
+        </p>
+      </article>
+       
+      <article class="fill">
+        <h3>
+          Play! + Scala - The Cache API
+        </h3>
+        <pre class="prettyprint top">
+Cache.set("item.key", connectedUser)
+val user: User = Cache.getOrElseAs[User]("item.key") {
+  User.findById(connectedUser)
+}
+        </pre>
+        <p>
+          <img class="centered top" src="images/batman.jpeg"   />
+        </p>
+      </article>
+
+      <article class="fill">
+        <h3>
+          Play! + Scala - The Build System
+        </h3>
+          <ul class="shadow">
+            <li>Based on sbt</li>
+            <li>Rails like</li>
+            <li>Errors on the browser</li>
+            <li>Asset pipeline</li>
+            <li>Evolutions(migrations)</li>
+          </ul>
+        <p>
+          <img class="centered top" src="images/batman.jpeg"   />
+        </p>
+      </article>
+
+      <article class="fill nobackground">
+          <h3>
+            Any questions?
+          </h3>
+        <ul class="build">
+          <h3 class="bottom">Thank you!</h3>
+        </ul>
+        <p>
+          <img class="centered top" src="images/thinking.jpeg"   />
+        </p>
+      </article>
+
+    </section>
+
+  </body>
+</html>
