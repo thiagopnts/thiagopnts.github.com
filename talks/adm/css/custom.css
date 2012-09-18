@@ -1,0 +1,75 @@
+.top {
+  position: relative;
+  top: 130px;
+}
+
+#logo {
+  position: relative !important;
+  width: 100px !important ;
+  height: 50px !important;
+  min-height: 50px !important;
+  min-width: 300px !important;
+  top: 565px;
+  z-index: 10000;
+  left: 530px;
+}
+
+article.nobackground h3 a {
+  color: white !important;
+  text-decoration: none !important;
+}
+
+
+article.fill h3 {
+    position: absolute;
+    width: 100%;
+}
+
+article.nobackground h3 {
+    background: rgba(0, 0, 0, .75) !important;
+    padding-top: .2em !important;
+    padding-bottom: .3em !important;
+    margin-top: -.2em !important;
+    margin-left: -60px !important;
+    padding-left: 60px !important;
+    margin-right: -60px !important;
+    padding-right: 60px !important;
+    position: absolute !important;
+    width: 100% !important;
+    color: #fff !important;
+}
+
+article.nobackground h3 a {
+    color: #fff !important;
+    text-decoration: none !important;
+}
+
+.bottom {
+  position: relative;
+  top: 100px;
+}
+
+.shadow {
+  text-shadow: -2px 0 2px black, 0 2px 2px black, 2px 0 2px black, 0 -2px 2px black;
+  text-decoration: bold;
+}
+
+.ignored {
+  position: relative;
+  height: auto !important;
+  width: auto !important;
+  background: none;
+  z-index:1000;
+  min-width: auto !important;
+  min-height: auto !important; 
+}
+
+article li {
+  color: white !important;
+  position: relative;
+  top: 80px;
+  font-style: bold;
+  font-size: 2em;
+  line-height: 1.2em;
+}
+
