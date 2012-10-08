@@ -14,3 +14,4 @@ In a mature project, the decisions about the project are often made after some e
 ##Analysis Patterns are Knowledge to Draw On
 
 These patterns doesn't give you full solutions, it oftens stimulates your development, and the changes and results comes from insights coming from the analysis. In the middle of this changes there is one kind  you should avoid, it's when you use a term from a well known analysis pattern, you should keep the basic concept intact, however much superficial it might be, and when you introduces this to your language this can take a new whole ubiquitous concept to your domain and this "hide thing" should be avoided.
+
