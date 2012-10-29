@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Summary of Relating Design Patterns to the Model
+title: Summary of Domain Driven Design - Relating Design Patterns to the Model
 ---
 
 So far, the patterns described in this book are intended specifically for problems related to a domain model in the context of a Model-Driven Design, so how can we know what's the difference between a common design pattern and a domain pattern? Most design patterns can be used as domain patterns, you just have to give the right emphasis in the context. The motivations of these patterns and the patterns themselves are presented in purely technical terms. But a subset of these elements can be applied in the broader context of domain modeling and design, because they correspond to general concepts that emerge in many domains. Some of them correspond to deep concepts that emerge in domains. It would be nice to draw on this work. To make use of such patterns in domain-driven design, we have to look at the patterns on two levels simultaneously. On one level, they are technical design patterns in the code. On the other level, they are conceptual patterns in the model. So you have to be aware that what matters is the concept that you are trying to represent, and the design patterns can help you with that. When we start to model processes we realize that there is more than one way to describe and do them, so its up to us to decide which way is the best approach to model the problem.
