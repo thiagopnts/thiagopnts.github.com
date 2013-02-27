@@ -1,0 +1,203 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto+Condensed);
+@font-face {
+  font-family: 'Enriqueta-Bold';
+  font-style: normal;
+  font-weight: 700;
+  src: local("Enriqueta-Bold"), url(enriqueta-bold.woff) format("woff");
+}
+
+@font-face {
+  font-family: 'Enriqueta';
+  font-style: normal;
+  font-weight: 400;
+  src: local("Enriqueta-Regular"), url(enriqueta.woff) format("woff");
+}
+
+/* line 21, ../sass/custom.scss */
+body {
+  font-family: 'Enriqueta';
+  color: #FFF;
+  margin: 0 auto;
+  position: relative;
+  width: 8000px;
+  overflow-x: hidden;
+  background-color: #FFFFFE;
+}
+
+/* line 31, ../sass/custom.scss */
+.wrapper {
+  color: #333;
+  margin: 0 auto;
+  position: relative;
+  width: 80%;
+  height: 100%;
+  position: relative;
+  top: 100px;
+}
+/* line 33, ../sass/custom.scss */
+.wrapper h2 {
+  font-size: 2.7em;
+  font-family: "Roboto Condensed", sans-serif;
+}
+/* line 37, ../sass/custom.scss */
+.wrapper p {
+  font-size: 2em;
+  line-height: 5px;
+}
+
+/* line 49, ../sass/custom.scss */
+#next {
+  position: fixed;
+  left: 90%;
+  bottom: 50%;
+}
+
+/* line 55, ../sass/custom.scss */
+a:visited {
+  color: #004835;
+}
+
+/* line 59, ../sass/custom.scss */
+.panel {
+  width: 930px;
+  float: left;
+  padding-left: 30px;
+  padding-right: 1040px;
+  margin-top: 45px;
+  display: block;
+}
+
+/* line 68, ../sass/custom.scss */
+.shadow {
+  text-shadow: rgba(3, 141, 103, 0.2) 1px 1px 0, rgba(3, 141, 103, 0.2) 2px 2px 0, rgba(0, 0, 0, 0.3) 4px 4px 0;
+}
+
+/* line 72, ../sass/custom.scss */
+.small-shadow {
+  text-shadow: rgba(3, 141, 103, 0.2) 1px 1px 0, rgba(3, 141, 103, 0.2) 1px 1px 0, rgba(0, 0, 0, 0.3) 2px 2px 0;
+}
+
+/* line 76, ../sass/custom.scss */
+.header {
+  position: fixed;
+  width: 100%;
+  height: 150px;
+  top: 0;
+  margin: 0 auto;
+  background-color: #00a478;
+  font-size: 1.7em;
+  border-bottom: solid 8px #007b5a;
+  height: 60px;
+}
+/* line 86, ../sass/custom.scss */
+.header a {
+  color: #FFF;
+}
+
+/* line 91, ../sass/custom.scss */
+.footer {
+  position: fixed;
+  width: 100%;
+  margin: 0 auto;
+  bottom: 0;
+  background-color: #00a478;
+  font-size: 1.3em;
+  border-top: solid 8px #007b5a;
+}
+
+/* line 101, ../sass/custom.scss */
+.li-box {
+  position: relative;
+  display: inline;
+}
+
+/* line 106, ../sass/custom.scss */
+.active {
+  position: relative;
+  background-color: #007b5a;
+}
+
+/* line 111, ../sass/custom.scss */
+.li-box:hover {
+  position: relative;
+  background-color: #007b5a;
+}
+
+/* line 116, ../sass/custom.scss */
+.li-box:active {
+  position: relative;
+  background-color: #007b5a;
+}
+
+/* line 122, ../sass/custom.scss */
+a:target {
+  background-color: #007b5a;
+}
+
+/* line 126, ../sass/custom.scss */
+a {
+  color: #004835;
+}
+
+/* line 130, ../sass/custom.scss */
+.nav-footer p {
+  font-size: 18px;
+}
+
+/* line 134, ../sass/custom.scss */
+.nav-footer img {
+  margin-right: 20px;
+}
+
+/* line 138, ../sass/custom.scss */
+#find-me {
+  position: relative;
+  left: 100px;
+  top: -15px;
+  float: left;
+}
+
+/* line 146, ../sass/custom.scss */
+.li-box li a {
+  position: relative;
+  vertical-align: middle;
+}
+
+/* line 153, ../sass/custom.scss */
+.li-box li {
+  position: relative;
+  vertical-align: middle;
+}
+
+/* line 158, ../sass/custom.scss */
+.nav-footer {
+  position: relative;
+  height: 100px;
+}
+/* line 161, ../sass/custom.scss */
+.nav-footer li {
+  position: relative;
+  top: 40px;
+}
+
+/* line 167, ../sass/custom.scss */
+.nav {
+  position: relative;
+  height: 150px;
+}
+/* line 170, ../sass/custom.scss */
+.nav ul {
+  text-align: center;
+  list-style: none;
+}
+/* line 173, ../sass/custom.scss */
+.nav ul li {
+  position: relative;
+  top: -10px;
+  display: inline;
+  margin: 8%;
+}
+/* line 185, ../sass/custom.scss */
+.nav h4 {
+  display: inline;
+}

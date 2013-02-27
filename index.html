@@ -1,14 +1,138 @@
----
-layout: layout
-title: "Thiago's Page"
----
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+  <!-- <link rel="stylesheet" href="stylesheets/ie.css"> -->
+  <!-- <link rel="stylesheet" href="stylesheets/print.css"> -->
+  <!-- <link rel="stylesheet" href="stylesheets/screen.css"> -->
+  <link rel="stylesheet" href="stylesheets/custom.css">
+  <script type="text/javascript" src="javascripts/jquery.js"></script>
+  <title>thiagopnts.me</title>
+</head>
+<script type="text/javascript">
 
-<section class="content">
-  <ul class="listing">
-    {% for post in site.posts %}
-    <li>
-      <span>{{ post.date | date: "%B %e, %Y" }}</span> <a href="{{ post.url }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-  </ul>
-</section>
+  var Slides = function() {
+    this.links = $('.li-box').children();
+    this.slides = {
+      '#about': this.links[0],
+      '#code' : this.links[1],
+      '#work' : this.links[2],
+      '#write': this.links[3]
+    };
+    this.current = 0;
+  };
+
+  Slides.prototype.next = function() {
+    //rolls back when gets in the end.
+    var nextSlide = (this.current + 1) % this.links.length;
+    this.moveTo(nextSlide);
+    this.current = nextSlide;
+  };
+
+  Slides.prototype.back = function() {
+    //same here, but when it reachs the begin.
+    var lastSlide = (this.current - 1) % this.links.length;
+    this.moveTo(lastSlide);
+    this.current = lastSlide;
+  };
+
+  Slides.prototype.moveTo = function(slide) {
+    this.links[slide].click();
+  };
+
+  Slides.prototype.goTo = function(name) {
+    setTimeout($.proxy(function() {
+      this.slides[name].click();
+    }, this), 1000);
+  }
+
+  $(document).ready(function() {
+    var current = location.hash,
+        slides = new Slides();
+    location.hash = current === '' ? '#about' : current;
+    slides.goTo(current);
+    $(".li-box").bind("click", function(event){
+      $(".li-box").removeClass('active');
+      $(this).addClass('active');
+      event.preventDefault();
+      var target = $(this).children().children().attr("href");
+      $("html, body").stop().animate({ scrollLeft: $(target).offset().left, scrollTop: $(target).offset().top }, 1200);
+      setTimeout(function() {
+        location.hash = target;
+      }, 1200);
+    });
+
+    $('#next').click(function(event) {
+      event.preventDefault();
+      slides.next();
+    });
+
+    setInterval(function() {
+      $("#next").animate({left: "+=40px"}, 150, "linear")
+      $('#next').animate({left: "-=40px"}, 250, "linear");
+    }, 2500);
+  }); 
+</script>
+<body>
+<a href="https://github.com/thiagopnts/thiagopnts.github.com"><img style="position: absolute; top: 0; left: 0; border: 0; z-index: 1000; position: fixed;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+  <div class="container">
+
+    <header class="header">
+      <nav class="nav shadow">
+        <ul>
+          <div class="li-box active"><li><a href="#about">ABOUT</a></li></div>
+          <div class="li-box"><li><a href="#code">CODE</a></li></div>
+          <div class="li-box"><li><a href="#work">WORK</a></li></div>
+          <div class="li-box"><li><a href="#write">WRITE</a></li></div>
+        </ul>
+      </nav>
+    </header>
+    <section id="about" class="panel">
+      <div class="wrapper small-shadow">
+        <!-- <h2>About me</h2> -->
+        <p>Hi!</p>
+        <p>My name is Thiago, </p>
+        <p>I'm a 23 years old brazilian programmer.</p>
+        <p>I've been working with software development </p>
+        <p>since 2010, mostly as a full stack web</p>
+        <p>developer. Also, I'm an Information Systems</p>
+        <p>student at <a href="http://ufpb.br">UFPB</a>.</p>
+      </div>
+      <a id="next-slide" href=""><img id="next" src="img/next.png" alt=""></a>
+    </section>
+    <section id="code" class="panel">
+      <div class="wrapper small-shadow">
+        <!-- <h2>Code</h2> -->
+        <p>Through these years I helped people build</p>
+        <p>all kinds of software, from highly concurrent</p>
+        <p> web services to client-side apps.</p>
+      </div>
+    </section>
+    <section id="work" class="panel">
+      <div class="wrapper small-shadow">
+        <!-- <h2>Work</h2> -->
+        <p>Fortunately, I always had the lucky to </p>
+        <p>work with really smart people.</p>
+        <p>I'm currently working at <a href="http://officedrop.com">OfficeDrop</a>,</p>
+        <p>a cloud document management company,</p>
+        <p>based in Boston.</p>
+      </div>
+    </section>
+    <section id="write" class="panel">
+      <div class="wrapper small-shadow">
+      <!-- <h2>Write</h2> -->
+      <p>Also, sometimes I write, checkout my <a href="/blog"> blog.</a></p>
+      </div>
+    </section>
+    <footer class="footer">
+      <nav class="nav-footer">
+        <section id="find-me" class="small-shadow">
+          <h3 id="contact">Contact me</h3>
+          <p><a href="http://fb.com/thiagopnts"><img src="img/fb.ico" height="15" width="15" alt="Facebook"></a> <a href="http://git.io/thi"> <img src="img/github.png"  alt="Github"></a><a href="http://twitter.com/thiagopnts"><img src="img/twitter.png" alt=""></a><a href="https://plus.google.com/117303233553417744419"><img src="img/gplus.png" alt="Google Plus" height="18" width="18"></a><a href="mailto:thiagopnts@gmail.com"><img src="img/mail.png" height="15" width="15" alt="E-mail"></a></p>
+        </section>
+      </nav>
+    </footer>
+
+  </div>  
+</body>
+</html>
