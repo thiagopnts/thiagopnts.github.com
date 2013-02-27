@@ -74,6 +74,14 @@
   }); 
 </script>
 <body>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=254582621301698";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 <a href="https://github.com/thiagopnts/thiagopnts.github.com"><img style="position: absolute; top: 0; left: 0; border: 0; z-index: 1000; position: fixed;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
   <div class="container">
 
@@ -129,10 +137,20 @@
         <section id="find-me" class="small-shadow">
           <h3 id="contact">Contact me</h3>
           <p><a href="http://fb.com/thiagopnts"><img src="img/fb.ico" height="15" width="15" alt="Facebook"></a> <a href="http://git.io/thi"> <img src="img/github.png"  alt="Github"></a><a href="http://twitter.com/thiagopnts"><img src="img/twitter.png" alt=""></a><a href="https://plus.google.com/117303233553417744419"><img src="img/gplus.png" alt="Google Plus" height="18" width="18"></a><a href="mailto:thiagopnts@gmail.com"><img src="img/mail.png" height="15" width="15" alt="E-mail"></a></p>
+          <div class="fb-like" data-href="http://thiagopnts.me" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
         </section>
       </nav>
     </footer>
 
   </div>  
+  <script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript  src='" + gaJsHost + "google-analytics.com/ga.js'  type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try{
+var pageTracker = _gat._getTracker("UA-xxxxxx-x");
+pageTracker._trackPageview();
+} catch(err) {}</script>
 </body>
 </html>
