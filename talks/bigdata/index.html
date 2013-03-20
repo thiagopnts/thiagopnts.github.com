@@ -27,8 +27,8 @@
 
         <style>
         .white-font {
-            color: white;
-            text-shadow: -4px 0 4px black, 0 4px 4px black, 4px 0 4px black, 0 -4px 4px black
+            color: white !important;
+            text-shadow: -4px 0 4px black, 0 4px 4px black, 4px 0 4px black, 0 -4px 4px black !important;
         }
         html.bigdata .state-background {
             background:url(img/bigdata.jpg) no-repeat;
@@ -41,10 +41,23 @@
             text-shadow: 5px 5px 5px #333;
             filter: dropshadow(color=#333, offx=1, offy=1);
         }
-        html.models .state-background {
-            background:url(img/models.jpg) no-repeat;
+        html.scientist .state-background {
+            background:url(img/scientist.jpg) no-repeat;
             background-position: center;
             background-size: 100%;
+            color: white;   
+        }
+        html.motor .state-background {
+            background:url(img/motor.jpg) no-repeat;
+            background-position: center;
+            background-size: 100%;
+            color: white;   
+        }
+        html.questions .state-background {
+            background:url(img/doubt.gif) no-repeat;
+            background-position: center;
+            background-size: 100%;
+            color: white;   
         }
         html.shocked .state-background {
             background:url(img/shocked.gif) no-repeat;
@@ -54,40 +67,6 @@
         html.shocked h2{
             background-color: rgba(3,3,3,0.8);
             color: white;
-        }
-        html.collections .state-background {
-            background:url(img/collections.jpg) no-repeat;
-            background-position: center;
-            background-size: 100%;
-        }
-        html.collections h1, html.collections h2{
-            background-color: rgba(3,3,3,0.8);
-            /*color: #333;*/
-        }
-        html.events .state-background {
-            background:url(img/events.jpg) no-repeat;
-            background-position: center;
-            background-size: 100%;
-        }
-        html.events h2, html.events p {
-            background-color: rgba(3,3,3,0.8);
-            /*color: #333;*/
-        }
-
-        html.views .state-background {
-            background:url(img/views.jpg) no-repeat;
-            background-position: center;
-            background-size: 100%;
-        }
-        html.views h2, html.views p {
-            background-color: rgba(3,3,3,0.8);
-            /*color: #333;*/
-        }
-
-        html.jquery .state-background {
-            background:url(img/jquery.jpg) no-repeat;
-            background-position: center;
-            background-size: 100%;
         }
 
         html.duvidas .state-background {
@@ -101,12 +80,6 @@
             background-position: center;
             background-size: 100%;
         }
-        
-        
-        /* html.models h2, html.models p {
-            background-color: rgba(3,3,3,0.8);
-            color: white;
-         }*/
 
 
         </style>
@@ -208,13 +181,42 @@
         <br>
     </div>
 </section>
-        
+
+<section data-state="scientist">
+    <h2 class="white-font">Surgimento de um novo profissional: O Data Scientist</h2>
+</section>
+
+<section data-state="motor">
+    <h2 class="white-font">Big Data por baixo dos panos</h2>
+</section>
+
+<!-- <section>
+    <ul>
+        <li>Escalabilidade</li>
+        <li>Replicação</li>
+        <li>Sistema de arquivos distribuído</li>
+        <li>NOSQL</li>
+    </ul>
+</section> -->
+
+<section>
+    <img src="img/hadoop.png" alt="">
+</section>
+<section>
+    <h1>HDFS</h1>
+    <h1>MapReduce</h1>
+</section>
+<section data-state="questions">
+    <h1 class="white-font">HDFS?</h1>
+</section>
+<section data-state="questions">
+    <h1 class="white-font">MapReduce?</h1>
+</section>
 <section data-state="duvidas">
-    <h1 class="white-font">Dúvidas?</h1>
+    <h2 class="white-font">Dúvidas?</h2>
 </section>
 <section data-state="obrigado">
-    <!-- <h2 class="white-font">Mas o que é Big Data?</h2> -->
-    <h2 class="white-font" style="position: relative;bottom: 300px;">Obrigado!!!</h2>
+    <h2 class="white-font">Obrigado!!!</h2>
 </section>
     </div>
 
