@@ -6,85 +6,19 @@
   <!-- <link rel="stylesheet" href="stylesheets/print.css"> -->
   <!-- <link rel="stylesheet" href="stylesheets/screen.css"> -->
   <link rel="stylesheet" href="stylesheets/custom.css">
-  <script type="text/javascript" src="javascripts/jquery.js"></script>
   <title>thiagopnts.me</title>
 </head>
-<script type="text/javascript">
-
-  var Slides = function() {
-    this.links = $('.li-box').children();
-    this.slides = {
-      '#about': this.links[0],
-      '#code' : this.links[1],
-      '#work' : this.links[2],
-      '#write': this.links[3]
-    };
-    this.current = 0;
-  };
-
-  Slides.prototype.next = function() {
-    //rolls back when gets in the end.
-    var nextSlide = (this.current + 1) % this.links.length;
-    this.moveTo(nextSlide);
-    this.current = nextSlide;
-  };
-
-  Slides.prototype.back = function() {
-    //same here, but when it reachs the begin.
-    var lastSlide = (this.current - 1) % this.links.length;
-    this.moveTo(lastSlide);
-    this.current = lastSlide;
-  };
-
-  Slides.prototype.moveTo = function(slide) {
-    this.links[slide].click();
-  };
-
-  Slides.prototype.goTo = function(name) {
-    setTimeout($.proxy(function() {
-      this.slides[name].click();
-    }, this), 1000);
-  }
-
-  $(document).ready(function() {
-    var current = location.hash,
-        slides = new Slides();
-    location.hash = current === '' ? '#about' : current;
-    slides.goTo(current);
-    $(".li-box").bind("click", function(event){
-      $(".li-box").removeClass('active');
-      $(this).addClass('active');
-      event.preventDefault();
-      var target = $(this).children().children().attr("href");
-      $("html, body").stop().animate({ scrollLeft: $(target).offset().left, scrollTop: $(target).offset().top }, 1200);
-      setTimeout(function() {
-        location.hash = target;
-      }, 1200);
-    });
-
-    $('#next').click(function(event) {
-      event.preventDefault();
-      slides.next();
-    });
-
-    setInterval(function() {
-      $("#next").animate({left: "+=40px"}, 150, "linear")
-      $('#next').animate({left: "-=40px"}, 250, "linear");
-    }, 2500);
-  }); 
-</script>
 <body>
   <div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=254582621301698";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-<a href="https://github.com/thiagopnts/thiagopnts.github.com"><img style="position: absolute; top: 0; left: 0; border: 0; z-index: 1000; position: fixed;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=254582621301698";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <a href="https://github.com/thiagopnts/thiagopnts.github.com"><img style="position: absolute; top: 0; left: 0; border: 0; z-index: 1000; position: fixed;" src="https://s3.amazonaws.com/github/ribbons/forkme_left_green_007200.png" alt="Fork me on GitHub"></a>
   <div class="container">
-
     <header class="header">
       <nav class="nav shadow">
         <ul>
@@ -141,16 +75,18 @@
         </section>
       </nav>
     </footer>
-
   </div>  
+  <script type="text/javascript" src="javascripts/jquery.js"></script>
+  <script type="text/javascript" src="javascripts/app.js"></script>
   <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript  src='" + gaJsHost + "google-analytics.com/ga.js'  type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try{
-var pageTracker = _gat._getTracker("UA-30240525-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript  src='" + gaJsHost + "google-analytics.com/ga.js'  type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try{
+      var pageTracker = _gat._getTracker("UA-30240525-1");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
 </body>
 </html>
