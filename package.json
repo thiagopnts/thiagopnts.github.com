@@ -1,0 +1,27 @@
+{
+  "name": "thiagopnts.me",
+  "version": "0.0.1",
+  "description": "Personal web page",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thiagopnts/thiagopnts.github.com.git"
+  },
+  "keywords": [
+    "personal",
+    "webpage",
+    "page"
+  ],
+  "author": "Thiago Pontes",
+  "license": "BSD",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-concat": "~0.1.3",
+    "grunt-contrib-cssmin": "~0.5.0",
+    "grunt-contrib-imagemin": "~0.1.2"
+  }
+}
