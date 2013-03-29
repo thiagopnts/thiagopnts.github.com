@@ -34,13 +34,21 @@ module.exports = function(grunt) {
           'dist/twitter.png': 'img/twitter.png'
         }
       }
+    },
+    cssmin: {
+      compress: {
+        files: {
+          'dist/custom.css': ['stylesheets/custom.css']
+        }
+      }
     }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-imagemin');
+  grunt.loadNpmTasks('grunt-contrib-cssmin');
 
-  grunt.registerTask('default', ['concat', 'uglify', 'imagemin']);
+  grunt.registerTask('default', ['concat', 'uglify', 'imagemin', 'cssmin']);
 
 };
