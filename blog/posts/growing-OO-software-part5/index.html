@@ -1,0 +1,139 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Summary of Growing OO Software, Guided by Tests - Maintaining the Test-Driven Cycle</title>
+  <meta name="author" content="Thiago Pontes" />
+  <meta name="description" content="Programming, Javascript, Ruby, Ruby on Rails, Scala, Python" />
+  <meta property="fb:admins" content="thiagopnts"/>
+  <link rel="openid.server" href="http://www.clickpass.com/openid_server" />
+  <link rel="stylesheet" href="/blog/css/compiled/base.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/blog/css/plugins/pygments.css" type="text/css" />
+  <link media="only screen and (max-device-width: 480px)" href="/blog/css/iphone.css" type="text/css" rel="stylesheet" />
+  <link media="only screen and (device-width: 768px)" href="/blog/css/ipad.css" type="text/css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/blog/js/compiled/application.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+    });
+  </script>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=254582621301698";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+    
+  <section class="sidebar">
+    <a href="/">
+      <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="75" width="75" class="avatar" />
+    </a>
+
+    <section class="name">
+      <a href="/">
+        <span id="thiago">Thiago</span>
+        <span id="pontes">Pontes</span>
+      </a>
+    </section>
+
+    <section class="alt-text">&nbsp;</section>
+
+    <section class="meta">
+      <a href="https://github.com/thiagopnts" id="github">
+        <img src="/blog/images/github.png" alt="github" title="thiagopnts on GitHub" height="16" width="16" />
+      </a>
+      <a href="https://twitter.com/thiagopnts" id="twitter">
+        <img src="/blog/images/twitter.png" alt="twitter" title="@thiagopnts on Twitter" height="16" width="16" />
+      </a>
+      <a href="http://feeds.feedburner.com/thiagopontes/lXRA" id="rss">
+        <img src="/blog/images/rss.png" alt="rss" title="Subscribe to this blog's RSS feed" height="16" width="16" />
+      </a>
+      
+    </section>
+
+  </section>
+
+  <section class="content">
+  <h1>
+    <a href="/posts/growing-OO-software-part5">Summary of Growing OO Software, Guided by Tests - Maintaining the Test-Driven Cycle</a>
+  </h1>
+
+  <section class="byline">
+    June 29, 2012
+  </section>
+
+  <p>This chapter is about how to keep the TDD proccess running, after we start it in our projects. This, and the other chapters are all about how to write tests as we build the system, how we use tests to get early feedback and how we ensure it that the tests continue to support change and to not become an obstacle to the development team.</p>
+
+<h2>Separate Tests That Measure Progress from Those That Catch Regressions</h2>
+
+<p>The acceptance tests we write to describe a new feature and serves as a feedback, once passing, the acceptance test now represent a completed feature and should not fail again, but if it fails, it means that there is a regression, which means that you broken existing code.
+We should organize the test suites to reflect different roles, unit and integration tests to support the development team(this tests should run quickly and should always pass), acceptance tests for completed features(to catch regressions and should always pass too, although they might take longer to run) and new acceptance tests represent work to do, and should not pass until the feature is fully implemented.</p>
+
+<h2>Start Testing with the Simplest Success Case</h2>
+
+<p>We should start by testing the simplest success case. Once working we&rsquo;ll have a better idea of the real structure of the solution and can prioritize between handling any possible failures we noticed along the way.
+The tests should be write as clear as possible to be used as an extension for documentation, so this documentation can be used by the development team.</p>
+
+<h2>Develop from the Inputs to the Outputs</h2>
+
+<p>We start developing a feature by considering the events coming into the system that will trigger the new behavior.The end-to-end tests for the feature will simulate these events arriving. At the boundaries of our system, we will need to write one or more objects to handle these events. It&rsquo;s tempting to start by unit-testing new domain model objects and then trying to hook them into the rest of the application. It seems easier at the start but we’re more likely to get bitten by integration problems later. We will have wasted time building unnecessary or incorrect functionality, because we weren&rsquo;t receiving the right kind of feedback when we were working on it.</p>
+
+<h2>Unit-Test Behavior, Not Methods</h2>
+
+<p>We all know that high test coverage does not guarantee a codebase that is easy to work with. We do better when we focus on the fatures that the object under test should provide, each of which may require collaboration with other objects, we need to know how to use the class to achieve a goal, which means the objects behavior should be right, and not the lines of code, because you could write some code without fully understand the problem and you will end up with a passing test for a wrong idea.</p>
+
+<h2>Turning the Cycle</h2>
+
+<p>How much unit testing should we do, using mock objects to break external dependencies, and how much integration testing? It depends too much on the context of the team and its environment. The best we can get from the testing part of TDD (which is a lot) is the confidence that we can change the code without breaking it: Fear kills progress. The trick is to make sure that the confidence is justified. So we observe to see how TDD is working for us and adapt it to our testing strategy.</p>
+
+
+  <section class="meta">
+    <h3>Discussion, links, and tweets</h3>
+    <section class="copy">
+      <a href="https://twitter.com/thiagopnts">
+        <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="80" width="80" />
+      </a>
+
+      <p>
+          I'm a Software Engineer Intern which among one line of code and a cup of coffee likes to listen to music and disagree with people. </br>
+          Feel free to send me a <a href="mailto:thiagopnts@gmail.com">email</a>. </br>
+          I'm <a href="https://twitter.com/thiagopnts">@thiagopnts</a> on Twitter. </br>
+          I'm <a href="http://git.io/thi">thiagopnts</a> on Github. </br>
+          You can find me on <a href="http://facebook.com/thiagopnts">Facebook</a> and <a href="http://www.linkedin.com/profile/view?id=82767657">Linkedin</a>.
+      </p>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-count="true" data-via="thiagopnts">Tweet</a>
+      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+      <a href="http://twitter.com/thiagopnts" class="twitter-follow-button" data-show-count="false">Follow @thiagopnts</a>
+      <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+      <div class="fb-like" data-href="http://thiagopontes.net/posts/growing-OO-software-part5" data-send="false" data-width="450" data-show-faces="true"></div>    
+      <div class="fb-comments" data-href="http://thiagopontes.net/posts/growing-OO-software-part5" data-num-posts="5" data-width="500"></div>    
+    </section>
+  </section>
+</section>
+
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18026195-3']);
+      _gaq.push(['_setDomainName', 'thiagopontes.net']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+
+</html>

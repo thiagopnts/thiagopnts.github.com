@@ -1,0 +1,141 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Growing OO Software, Guided by Tests - An Introduction to the Tools</title>
+  <meta name="author" content="Thiago Pontes" />
+  <meta name="description" content="Programming, Javascript, Ruby, Ruby on Rails, Scala, Python" />
+  <meta property="fb:admins" content="thiagopnts"/>
+  <link rel="openid.server" href="http://www.clickpass.com/openid_server" />
+  <link rel="stylesheet" href="/blog/css/compiled/base.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/blog/css/plugins/pygments.css" type="text/css" />
+  <link media="only screen and (max-device-width: 480px)" href="/blog/css/iphone.css" type="text/css" rel="stylesheet" />
+  <link media="only screen and (device-width: 768px)" href="/blog/css/ipad.css" type="text/css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/blog/js/compiled/application.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+    });
+  </script>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=254582621301698";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+    
+  <section class="sidebar">
+    <a href="/">
+      <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="75" width="75" class="avatar" />
+    </a>
+
+    <section class="name">
+      <a href="/">
+        <span id="thiago">Thiago</span>
+        <span id="pontes">Pontes</span>
+      </a>
+    </section>
+
+    <section class="alt-text">&nbsp;</section>
+
+    <section class="meta">
+      <a href="https://github.com/thiagopnts" id="github">
+        <img src="/blog/images/github.png" alt="github" title="thiagopnts on GitHub" height="16" width="16" />
+      </a>
+      <a href="https://twitter.com/thiagopnts" id="twitter">
+        <img src="/blog/images/twitter.png" alt="twitter" title="@thiagopnts on Twitter" height="16" width="16" />
+      </a>
+      <a href="http://feeds.feedburner.com/thiagopontes/lXRA" id="rss">
+        <img src="/blog/images/rss.png" alt="rss" title="Subscribe to this blog's RSS feed" height="16" width="16" />
+      </a>
+      
+    </section>
+
+  </section>
+
+  <section class="content">
+  <h1>
+    <a href="/posts/growing-OO-software-part3">Growing OO Software, Guided by Tests - An Introduction to the Tools</a>
+  </h1>
+
+  <section class="byline">
+    June 13, 2012
+  </section>
+
+  <p>The book is about techniques to guide the development of OO software using tests, and it&rsquo;s not about specific technologies, but to demonstrate some techniques in action the book uses some technologies, such as JUnit 4, Hamcrest and jMock2 frameworks.</p>
+
+<h2>A Minimal Introduction to JUnit 4</h2>
+
+<p>I believe that everybody that got an OO course, has some experience with JUnit framework, in this section we can see some features this framework provide for us, such as expected exceptions and test fixtures.</p>
+
+<h3>Expecting Exceptions</h3>
+
+<p>The @Test annotation supports an optional parameter <code>expected</code> that declares that this test case expect an exception, with this the test fails if it doesn&rsquo;t throw an exception or if throws a different exception than the expected one.</p>
+
+<h3>Test Fixtures</h3>
+
+<p>This is a great feature but under used many times, which provides a fixed state at the start of a test, this ensures that a test is repeatable, so every time a test run it starts with the same state so it can produce the same results. A fixture must be set up before the test runs and torn down after it. The fixture is managed by the class that defines the test. JUnit use the @Before to set the things up, and @After to tear down the fixture.</p>
+
+<h3>Hamcrest Matchers and assertThat()</h3>
+
+<p>Hamcrest is a framework for writing declarative match criteria, it&rsquo;s used by others testing frameworks such as JUnit and jMock. A Hamcrest matcher reports whether an object matches or not some criteria. In practice those matchers are used in combination with JUnit&rsquo;s assertThat(), which uses matchers to say if a assertion fails. The most useful feature of Hamcrest is defining new criteria by combining existing matchers. The not() method is a factory function that creates a matcher that reverses the sense of any matcher passed to it. Matchers are designed so that when they’re combined, both the code and the failure messages are self-explanatory. The Hamcrest is also extensible, you can write your own matcher if you need.</p>
+
+<h3>jMock2: Mock Objects</h3>
+
+<p>jMock2 plugs into JUnit (and other test frameworks) providing support for mock objects. This framework creates mock objects dinamically, so you don&rsquo;t have to write your own implementations of the types you want. The core concepts of the jMock are the mockery, mock objects and expectations. A mockery represents the context of the object under test, its neighboring objects, the mock objects stand in for the real neighbors of the object under test while it runs and a expectations decribes how the object under test should invoke its neighbors during the test.</p>
+
+<h2>Conclusion</h2>
+
+<p>Although the book introduce only tools from the Java world, all this kinds of frameworks can be found in all the common programming language, its good to know the first then when you need something like this in other languages you already know where to look, since most of the implementations are based on this.</p>
+
+
+  <section class="meta">
+    <h3>Discussion, links, and tweets</h3>
+    <section class="copy">
+      <a href="https://twitter.com/thiagopnts">
+        <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="80" width="80" />
+      </a>
+
+      <p>
+          I'm a Software Engineer Intern which among one line of code and a cup of coffee likes to listen to music and disagree with people. </br>
+          Feel free to send me a <a href="mailto:thiagopnts@gmail.com">email</a>. </br>
+          I'm <a href="https://twitter.com/thiagopnts">@thiagopnts</a> on Twitter. </br>
+          I'm <a href="http://git.io/thi">thiagopnts</a> on Github. </br>
+          You can find me on <a href="http://facebook.com/thiagopnts">Facebook</a> and <a href="http://www.linkedin.com/profile/view?id=82767657">Linkedin</a>.
+      </p>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-count="true" data-via="thiagopnts">Tweet</a>
+      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+      <a href="http://twitter.com/thiagopnts" class="twitter-follow-button" data-show-count="false">Follow @thiagopnts</a>
+      <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+      <div class="fb-like" data-href="http://thiagopontes.net/posts/growing-OO-software-part3" data-send="false" data-width="450" data-show-faces="true"></div>    
+      <div class="fb-comments" data-href="http://thiagopontes.net/posts/growing-OO-software-part3" data-num-posts="5" data-width="500"></div>    
+    </section>
+  </section>
+</section>
+
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18026195-3']);
+      _gaq.push(['_setDomainName', 'thiagopontes.net']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+
+</html>

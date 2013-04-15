@@ -1,0 +1,165 @@
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Summary of Domain Driven Design - A Model Expressed in Software</title>
+  <meta name="author" content="Thiago Pontes" />
+  <meta name="description" content="Programming, Javascript, Ruby, Ruby on Rails, Scala, Python" />
+  <meta property="fb:admins" content="thiagopnts"/>
+  <link rel="openid.server" href="http://www.clickpass.com/openid_server" />
+  <link rel="stylesheet" href="/blog/css/compiled/base.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/blog/css/plugins/pygments.css" type="text/css" />
+  <link media="only screen and (max-device-width: 480px)" href="/blog/css/iphone.css" type="text/css" rel="stylesheet" />
+  <link media="only screen and (device-width: 768px)" href="/blog/css/ipad.css" type="text/css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/blog/js/compiled/application.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+    });
+  </script>
+</head>
+
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=254582621301698";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+    
+  <section class="sidebar">
+    <a href="/">
+      <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="75" width="75" class="avatar" />
+    </a>
+
+    <section class="name">
+      <a href="/">
+        <span id="thiago">Thiago</span>
+        <span id="pontes">Pontes</span>
+      </a>
+    </section>
+
+    <section class="alt-text">&nbsp;</section>
+
+    <section class="meta">
+      <a href="https://github.com/thiagopnts" id="github">
+        <img src="/blog/images/github.png" alt="github" title="thiagopnts on GitHub" height="16" width="16" />
+      </a>
+      <a href="https://twitter.com/thiagopnts" id="twitter">
+        <img src="/blog/images/twitter.png" alt="twitter" title="@thiagopnts on Twitter" height="16" width="16" />
+      </a>
+      <a href="http://feeds.feedburner.com/thiagopontes/lXRA" id="rss">
+        <img src="/blog/images/rss.png" alt="rss" title="Subscribe to this blog's RSS feed" height="16" width="16" />
+      </a>
+      
+    </section>
+
+  </section>
+
+  <section class="content">
+  <h1>
+    <a href="/posts/domain-driven-design-part3">Summary of Domain Driven Design - A Model Expressed in Software</a>
+  </h1>
+
+  <section class="byline">
+    August 17, 2012
+  </section>
+
+  <p>This chapter starts with a discussion about the issues involved to design associations between objects. They are simple to conceive and draw, but implementing them always end up in problems or bad design. This part is focused on making distinctions among the three patterns of model elements that express the model: Entities, Value, Objects and Services.</p>
+
+<h2>Associations</h2>
+
+<p>The interaction between modeling and implementation is particularly tricky with the associations between objects.</p>
+
+<p>For example, a one-to-many association migth be implemented as a collection in an instance variable. But the design is not necessarily so direct. The design has to specify a particular traversal mechanism whose behavior is consistent with the association in the model. There are at least three ways of making associations more tractable:</p>
+
+<ol>
+<li>Imposing a traversal direction</li>
+<li>Adding a qualifier, effectively reducing multiplicity.</li>
+<li>Eliminating nonessential associations</li>
+</ol>
+
+
+<p>For example, a country has had many presidents, so it&rsquo;s a one-to-many relation, but with can change the direction of this relation from adding just the a <code>Country -&gt;* President</code>, avoiding a &ldquo;Dilma is president of which country?&rdquo; use. We can go even futher, as we know a country has only one president at a time, this qualifies a one-to-one relation <code>Country -&gt; President</code>, based on a period. So the question turns to a &ldquo;Who was the president of Brazil in 2010?&rdquo;</p>
+
+<h2>Entities</h2>
+
+<p>Some objects are not defined primarily by their attributes. They represent a thread of identity that runs through time and often across distinct representations. An object must be distinguished from other objects even though they might have the same attributes. Mistaken identity can lead to data corruption. An object that is defined primarily by its identity is called an entity.</p>
+
+<h2>Value Objects</h2>
+
+<p>Many objects have no conceptual identity. These objects describe some characteristic of a thing. A Value Object is an object that representes a descriptive aspect of the domain with no conceptual identity. They are instantiated to represent elements of the design that we care about only for what they are, not who or which they are.</p>
+
+<p>Value Objects are often passed as parameters in messages between objects. They are frequently transient, created for an operation and then discarded. So, an object can be classified as a Value Object when you care only about the attributes of a model, so it should not have any identity and should be immutable.</p>
+
+<h2>Services</h2>
+
+<p>&ldquo;Sometimes, it just isn&rsquo;t a thing.&rdquo;</p>
+
+<p>There are important domain operations that can&rsquo;t find a natural home in an Entity or Value Object. Some of these are activities or action, not things, but since our modeling paradigm is objects, we try to fit them into objects anyway.</p>
+
+<p>A good service has three characteristics</p>
+
+<ol>
+<li>The operation relates to a domain concept that is not a natural part of an Entity or Value Object</li>
+<li>The interface is defined in terms of other elements of the domain model.</li>
+<li>The operation is stateless</li>
+</ol>
+
+
+<p>The statelessness here means that any client can use any instance of a particular Service without regard to the instance&rsquo;s individual history.</p>
+
+<p>This pattern favors interface simplicity over client control and versatility. It provides a medium grain of functionality very useful in packaging components of large or distributed systems. And sometimes a Service is the most natural way to express a domain concept.</p>
+
+<h2>Modules</h2>
+
+<p>Modules are an old, established design element. There are technical considerations, but congnitive overload is the primary motivation for modularity. Everyone uses Modules, but a few treat them as a full-fledged part of the model. Code gets broken down into all sorts of categories, from aspects of the technical architecture to developers work assignments. Even developers who refactor a lot tend to content themselves with Modules conceived early in the project.</p>
+
+
+  <section class="meta">
+    <h3>Discussion, links, and tweets</h3>
+    <section class="copy">
+      <a href="https://twitter.com/thiagopnts">
+        <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="80" width="80" />
+      </a>
+
+      <p>
+          I'm a Software Engineer Intern which among one line of code and a cup of coffee likes to listen to music and disagree with people. </br>
+          Feel free to send me a <a href="mailto:thiagopnts@gmail.com">email</a>. </br>
+          I'm <a href="https://twitter.com/thiagopnts">@thiagopnts</a> on Twitter. </br>
+          I'm <a href="http://git.io/thi">thiagopnts</a> on Github. </br>
+          You can find me on <a href="http://facebook.com/thiagopnts">Facebook</a> and <a href="http://www.linkedin.com/profile/view?id=82767657">Linkedin</a>.
+      </p>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-count="true" data-via="thiagopnts">Tweet</a>
+      <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+      <a href="http://twitter.com/thiagopnts" class="twitter-follow-button" data-show-count="false">Follow @thiagopnts</a>
+      <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
+      <div class="fb-like" data-href="http://thiagopontes.net/posts/domain-driven-design-part3" data-send="false" data-width="450" data-show-faces="true"></div>    
+      <div class="fb-comments" data-href="http://thiagopontes.net/posts/domain-driven-design-part3" data-num-posts="5" data-width="500"></div>    
+    </section>
+  </section>
+</section>
+
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18026195-3']);
+      _gaq.push(['_setDomainName', 'thiagopontes.net']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+
+</html>
