@@ -1,14 +1,199 @@
----
-layout: layout
-title: "Thiago's Page"
----
+<!DOCTYPE>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <title>Thiago's Page</title>
+  <meta name="author" content="Thiago Pontes" />
+  <meta name="description" content="Programming, Javascript, Ruby, Ruby on Rails, Scala, Python" />
+  <meta property="fb:admins" content="thiagopnts"/>
+  <link rel="openid.server" href="http://www.clickpass.com/openid_server" />
+  <link rel="stylesheet" href="/blog/css/compiled/base.css" type="text/css" media="screen, projection" />
+  <link rel="stylesheet" href="/blog/css/plugins/pygments.css" type="text/css" />
+  <link media="only screen and (max-device-width: 480px)" href="/blog/css/iphone.css" type="text/css" rel="stylesheet" />
+  <link media="only screen and (device-width: 768px)" href="/blog/css/ipad.css" type="text/css" rel="stylesheet" />
+  <link href='http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz' rel='stylesheet' type='text/css'>
+  <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/blog/js/compiled/application.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      
+    });
+  </script>
+</head>
 
-<section class="content">
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1&appId=254582621301698";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+    
+  <section class="sidebar">
+    <a href="/">
+      <img src="http://www.gravatar.com/avatar/dfdcc7fdb4b631ae9c30acd5ac6c2cbe.png" height="75" width="75" class="avatar" />
+    </a>
+
+    <section class="name">
+      <a href="/">
+        <span id="thiago">Thiago</span>
+        <span id="pontes">Pontes</span>
+      </a>
+    </section>
+
+    <section class="alt-text">&nbsp;</section>
+
+    <section class="meta">
+      <a href="https://github.com/thiagopnts" id="github">
+        <img src="/blog/images/github.png" alt="github" title="thiagopnts on GitHub" height="16" width="16" />
+      </a>
+      <a href="https://twitter.com/thiagopnts" id="twitter">
+        <img src="/blog/images/twitter.png" alt="twitter" title="@thiagopnts on Twitter" height="16" width="16" />
+      </a>
+      <a href="http://feeds.feedburner.com/thiagopontes/lXRA" id="rss">
+        <img src="/blog/images/rss.png" alt="rss" title="Subscribe to this blog's RSS feed" height="16" width="16" />
+      </a>
+      
+    </section>
+
+  </section>
+
+  <section class="content">
   <ul class="listing">
-    {% for post in site.posts %}
+    
     <li>
-      <span>{{ post.date | date: "%B %e, %Y" }}</span> <a href="{{ post.url }}">{{ post.title }}</a>
+      <span>October 26, 2012</span> <a href="/posts/domain-driven-design-part10">Summary of Domain Driven Design - Refactoring Toward Deeper Insight</a>
     </li>
-    {% endfor %}
+    
+    <li>
+      <span>October 19, 2012</span> <a href="/posts/domain-driven-design-part9">Summary of Domain Driven Design - Relating Design Patterns to the Model</a>
+    </li>
+    
+    <li>
+      <span>October  5, 2012</span> <a href="/posts/domain-driven-design-part8">Summary of Domain Driven Design - Applying Analysis Patterns</a>
+    </li>
+    
+    <li>
+      <span>September 21, 2012</span> <a href="/posts/domain-driven-design-part7">Summary of Domain Driven Design - Supple Design</a>
+    </li>
+    
+    <li>
+      <span>September 14, 2012</span> <a href="/posts/domain-driven-design-part6">Summary of Domain Driven Design - Making Implicit Concepts Explicit</a>
+    </li>
+    
+    <li>
+      <span>August 31, 2012</span> <a href="/posts/domain-driven-design-part5">Summary of Domain Driven Design - Breakthrough</a>
+    </li>
+    
+    <li>
+      <span>August 24, 2012</span> <a href="/posts/domain-driven-design-part4">Summary of Domain Driven Design - The Life Cycle of a Domain Object</a>
+    </li>
+    
+    <li>
+      <span>August 17, 2012</span> <a href="/posts/domain-driven-design-part3">Summary of Domain Driven Design - A Model Expressed in Software</a>
+    </li>
+    
+    <li>
+      <span>August 10, 2012</span> <a href="/posts/domain-driven-design-part2">Summary of Domain Driven Design - Isolating the Domain</a>
+    </li>
+    
+    <li>
+      <span>July 20, 2012</span> <a href="/posts/growing-OO-software-part8">Summary of Growing OO Software, Guided by Tests - Building on Third-Party Code</a>
+    </li>
+    
+    <li>
+      <span>July 13, 2012</span> <a href="/posts/growing-OO-software-part7">Summary of Growing OO Software, Guided by Tests - Achieving Object-Oriented Design</a>
+    </li>
+    
+    <li>
+      <span>July  6, 2012</span> <a href="/posts/growing-OO-software-part6">Summary of Growing OO Software, Guided by Tests - Object-Oriented Style</a>
+    </li>
+    
+    <li>
+      <span>July  2, 2012</span> <a href="/posts/setup-ror-env">Setting up a Ruby on Rails Development Environment on Ubuntu 12.04</a>
+    </li>
+    
+    <li>
+      <span>June 29, 2012</span> <a href="/posts/growing-OO-software-part5">Summary of Growing OO Software, Guided by Tests - Maintaining the Test-Driven Cycle</a>
+    </li>
+    
+    <li>
+      <span>June 22, 2012</span> <a href="/posts/growing-OO-software-part4">Growing OO Software, Guided by Tests - Kick Starting the Test-Driven Cycle</a>
+    </li>
+    
+    <li>
+      <span>June 13, 2012</span> <a href="/posts/growing-OO-software-part3">Growing OO Software, Guided by Tests - An Introduction to the Tools</a>
+    </li>
+    
+    <li>
+      <span>June  8, 2012</span> <a href="/posts/growing-OO-software-part2">Growing OO Software, Guided by Tests - Test-Driven Development with Objects</a>
+    </li>
+    
+    <li>
+      <span>June  1, 2012</span> <a href="/posts/growing-OO-software-part1">Growing OO Software, Guided by Tests - What is the point of TDD?</a>
+    </li>
+    
+    <li>
+      <span>May 24, 2012</span> <a href="/posts/domain-driven-design-part1">Putting the Domain Model to Work</a>
+    </li>
+    
+    <li>
+      <span>May 19, 2012</span> <a href="/posts/enterprise-patterns-part8">Patterns of Enterprise Application Architecture - Putting It All Together</a>
+    </li>
+    
+    <li>
+      <span>May 11, 2012</span> <a href="/posts/enterprise-patterns-part7">Patterns of Enterprise Application Architecture - Distribution Strategies</a>
+    </li>
+    
+    <li>
+      <span>May  2, 2012</span> <a href="/posts/enterprise-patterns-part6">Patterns of Enterprise Application Architecture - Session State</a>
+    </li>
+    
+    <li>
+      <span>April 25, 2012</span> <a href="/posts/enterprise-patterns-part5">Patterns of Enterprise Application Architecture - Concurrency</a>
+    </li>
+    
+    <li>
+      <span>April 18, 2012</span> <a href="/posts/enterprise-patterns-part4">Patterns of Enterprise Application Architecture - Web Presentation</a>
+    </li>
+    
+    <li>
+      <span>April 11, 2012</span> <a href="/posts/enterprise-patterns-part3">Patterns of Enterprise Application Architecture - Mapping to Relational Databases</a>
+    </li>
+    
+    <li>
+      <span>April  4, 2012</span> <a href="/posts/enterprise-patterns-part2">Patterns of Enterprise Application Architecture - Organizing Domain Logic</a>
+    </li>
+    
+    <li>
+      <span>March 28, 2012</span> <a href="/posts/enterprise-patterns-part1">Patterns of Enterprise Application Architecture - Layering</a>
+    </li>
+    
+    <li>
+      <span>March 21, 2012</span> <a href="/posts/hello-world">Hello world and The Passionate Programmer</a>
+    </li>
+    
   </ul>
 </section>
+
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-18026195-3']);
+      _gaq.push(['_setDomainName', 'thiagopontes.net']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+</body>
+
+</html>
