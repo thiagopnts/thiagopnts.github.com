@@ -3,6 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Redirecting...</title>
+    <script src="javascripts/jquery.js"></script>
+    <script>
+        (function() {
+            var key = location.href.split('/').pop();
+            $.get('http://theshortener.herokuapp.com/' + key)
+            .done(function(url) {
+                location.href = url;
+            });
+        })();
+    </script>
 </head>
 <body>
 
