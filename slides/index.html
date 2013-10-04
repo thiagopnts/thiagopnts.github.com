@@ -138,8 +138,13 @@
 
       (function() {
         var socket = io.connect('http://tcc.cloud.tsuru.io:80');
-        socket.on('next', function(message) {
-          Reveal.next();
+        socket.on('next', function(info) {
+          var current = Reveal.getIndices().h;
+          if(current != info.current) {
+              Reveal.slide(info.current);
+            } else {
+              Reveal.next();
+            }
         });
 
         socket.on('prev', function(message) {
