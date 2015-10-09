@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>360 PoC Demo</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+				background-color: blue;
+				overflow: hidden;
+                cursor: move;
+				margin: 0px;
+			}
+		</style>
+	</head>
+	<body>
+
+		<div id="container"></div>
+        <canvas id="surface" style="display:none">
+        <video  style="display:none" id="video" src="https://dl.dropboxusercontent.com/u/12518589/starwars.mp4" controls="true" autoplay="autoplay"></video>
+
+		<script src="three.min.js"></script>
+		<script src="360.js"></script>
+
+	</body>
+</html>
