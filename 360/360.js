@@ -2,6 +2,7 @@
 var canvas = document.getElementById('surface');
 var ctx = canvas.getContext('2d');
 var video = document.getElementById('video');
+video.crossOrigin = "Anonymous";
 canvas.height = 512;
 canvas.width = 512 * 4;
 video.play();
