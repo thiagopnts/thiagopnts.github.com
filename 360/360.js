@@ -21,7 +21,7 @@ var draw = function() {
     requestAnimationFrame(draw)
 };
 
-document.getElementById('video').addEventListener('play', function() {
+video.addEventListener('play', function() {
     console.log('loaded');
     draw();
 });
