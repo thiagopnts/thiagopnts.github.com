@@ -107,7 +107,7 @@ camera.position.z = 4;
 
 var render =  function() {
     requestAnimationFrame(render);
-    cube.rotation.y += 0.05;
+    cube.rotation.y += 0.01;
     texture.needsUpdate = true;
     texture2.needsUpdate = true;
     texture3.needsUpdate = true;
