@@ -7,15 +7,14 @@
 </head>
 <body>
 
-    <canvas id="canvas1" style="display:none" height="512" width="512"> </canvas>
-    <canvas id="canvas2" style="display:none" height="512" width="512"> </canvas>
-    <canvas id="canvas3" style="display:none" height="512" width="512"> </canvas>
-    <canvas id="canvas4" style="display:none" height="512" width="512"> </canvas>
-    <canvas id="canvas5" style="display:none" height="512" width="512"> </canvas>
-    <canvas id="canvas6" style="display:none" height="512" width="512"> </canvas>
 <video  style="display:none" id="video" src="starwars.mp4" crossorigin="anonymous" controls="true" ></video>
 <script src="three.min.js"></script>
+<script src="CanvasRenderer.js"></script>
+<script src="Projector.js"></script>
 <script type="text/javascript" charset="utf-8" src="cube.js"></script>
+
+<br /><button type="button" onclick="document.getElementById('video').play()">play</button>
+<button type="button" onclick="document.getElementById('video').pause()">pause</button>
 
 </body>
 </html>
