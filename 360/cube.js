@@ -35,8 +35,16 @@ video.addEventListener('play', function() {
     draw();
 });
 
+var texture_placeholder,
+            isUserInteracting = false,
+            onMouseDownMouseX = 0, onMouseDownMouseY = 0,
+            lon = 90, onMouseDownLon = 0,
+            lat = 0, onMouseDownLat = 0,
+            phi = 0, theta = 0,
+            target = new THREE.Vector3();
+
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera(75, 720 / 640, 1, 1000);
+var camera = new THREE.PerspectiveCamera(75, 720 / 640, 1, 1100);
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(720, 460);
@@ -48,20 +56,8 @@ var texture3 = new THREE.Texture(canvas3);
 var texture4 = new THREE.Texture(canvas4);
 var texture5 = new THREE.Texture(canvas5);
 var texture6 = new THREE.Texture(canvas6);
-texture.minFilter = THREE.LinearFilter;
-texture.needsUpdate = true;
-texture2.minFilter = THREE.LinearFilter;
-texture2.needsUpdate = true;
-texture3.minFilter = THREE.LinearFilter;
-texture3.needsUpdate = true;
-texture4.minFilter = THREE.LinearFilter;
-texture4.needsUpdate = true;
-texture5.minFilter = THREE.LinearFilter;
-texture5.needsUpdate = true;
-texture6.minFilter = THREE.LinearFilter;
-texture6.needsUpdate = true;
 
-var geometry = new THREE.BoxGeometry(2, 2, 2);
+var geometry = new THREE.BoxGeometry(300, 300, 300, 7, 7, 7);
 
 var materials = [];
 
@@ -82,11 +78,18 @@ var material = new THREE.MeshFaceMaterial(materials);
 //var material = new THREE.MeshBasicMaterial({color: 0xFF0000});
 window.cube = new THREE.Mesh(geometry, material);
 
+cube.scale.x = -1;
+
 scene.add(cube);
 
+for (var i = 0; i < cube.geometry.vertices.length; i++) {
+    var v = cube.geometry.vertices[i];
+    v.normalize();
+    v.multiplyScalar(550);
+}
 
 
-camera.position.z = 4;
+
 //setTimeout(function() {
 //var vertices = cube.geometry.vertices;
 //var sqrt = Math.sqrt;
@@ -105,16 +108,94 @@ camera.position.z = 4;
 //}
 //}, 3000)
 
-cube.rotation.x = 0.4;
+document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+document.addEventListener( 'mouseup', onDocumentMouseUp, false );
+document.addEventListener( 'mousewheel', onDocumentMouseWheel, false );
+
+function onDocumentMouseDown( event ) {
+
+    event.preventDefault();
+
+    isUserInteracting = true;
+
+    onPointerDownPointerX = event.clientX;
+    onPointerDownPointerY = event.clientY;
+
+    onPointerDownLon = lon;
+    onPointerDownLat = lat;
+
+}
+
+function onDocumentMouseMove( event ) {
+
+    if ( isUserInteracting === true ) {
+
+        lon = ( onPointerDownPointerX - event.clientX ) * 0.2 + onPointerDownLon;
+        lat = ( event.clientY - onPointerDownPointerY ) * 0.2 + onPointerDownLat;
+
+    }
+}
+
+function onDocumentMouseUp( event ) {
+
+    isUserInteracting = false;
+
+}
+
+function onDocumentMouseWheel( event ) {
+
+    // WebKit
+
+    if ( event.wheelDeltaY ) {
+
+        camera.fov -= event.wheelDeltaY * 0.05;
+
+    // Opera / Explorer 9
+
+    } else if ( event.wheelDelta ) {
+
+        camera.fov -= event.wheelDelta * 0.05;
+
+    // Firefox
+
+    } else if ( event.detail ) {
+
+        camera.fov -= event.detail * 0.05;
+
+    }
+
+    camera.updateProjectionMatrix();
+
+}
+
 var render =  function() {
     requestAnimationFrame(render);
-    cube.rotation.y += 0.01;
     texture.needsUpdate = true;
     texture2.needsUpdate = true;
     texture3.needsUpdate = true;
     texture4.needsUpdate = true;
     texture5.needsUpdate = true;
     texture6.needsUpdate = true;
+
+if ( isUserInteracting === false ) {
+
+                    lon += 0.1;
+
+                }
+
+                lat = Math.max( - 85, Math.min( 85, lat ) );
+                phi = THREE.Math.degToRad( 90 - lat );
+                theta = THREE.Math.degToRad( lon );
+
+                target.x = 500 * Math.sin( phi ) * Math.cos( theta );
+                target.y = 500 * Math.cos( phi );
+                target.z = 500 * Math.sin( phi ) * Math.sin( theta );
+
+                camera.position.copy( target ).negate();
+                camera.lookAt( target );
+
+
     renderer.render(scene, camera);
 }
 
