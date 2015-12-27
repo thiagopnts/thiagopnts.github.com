@@ -1,6 +1,6 @@
 (function() {
-var width = 1024,
-    height = 720;
+var width = window.innerWidth,
+    height = window.innerHeight;
 
 var color = d3.scale.category20();
 
