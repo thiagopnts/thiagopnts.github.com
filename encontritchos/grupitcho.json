@@ -36,7 +36,8 @@
     {"index": 33, "name":"Uzunian", "picture": "pictures/uzunian.png"},
     {"index": 34, "name":"Marcella Nery", "picture": "pictures/marcella.png"},
     {"index": 35, "name":"Matheus Canella", "picture": "pictures/matheus.png"},
-    {"index": 36, "name":"Marina Oliveira", "picture": "pictures/marina.png"}
+    {"index": 36, "name":"Marina Oliveira", "picture": "pictures/marina.png"},
+    {"index": 37, "name":"Nunes", "picture": "pictures/nunes.png"}
   ],
   "links":[
       {"source": 7, "target": 9},
