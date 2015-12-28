@@ -31,13 +31,12 @@
     {"index": 28, "name":"Rafaela Menezes", "picture": "pictures/rafaela.png"},
     {"index": 29, "name":"Rafael Morandini", "picture": "pictures/morandini.png"},
     {"index": 30, "name":"Herick", "picture": "pictures/herick.png"},
-    {"index": 31, "name":"Mariana", "picture": "pictures/mariana.png"},
-    {"index": 32, "name":"Suyane Kollenberg", "picture": "pictures/suyane.png"},
-    {"index": 33, "name":"Uzunian", "picture": "pictures/uzunian.png"},
-    {"index": 34, "name":"Marcella Nery", "picture": "pictures/marcella.png"},
-    {"index": 35, "name":"Matheus Canella", "picture": "pictures/matheus.png"},
-    {"index": 36, "name":"Marina Oliveira", "picture": "pictures/marina.png"},
-    {"index": 37, "name":"Nunes", "picture": "pictures/nunes.png"}
+    {"index": 31, "name":"Suyane Kollenberg", "picture": "pictures/suyane.png"},
+    {"index": 32, "name":"Uzunian", "picture": "pictures/uzunian.png"},
+    {"index": 33, "name":"Marcella Nery", "picture": "pictures/marcella.png"},
+    {"index": 34, "name":"Matheus Canella", "picture": "pictures/matheus.png"},
+    {"index": 35, "name":"Marina Oliveira", "picture": "pictures/marina.png"},
+    {"index": 36, "name":"Nunes", "picture": "pictures/nunes.png"}
   ],
   "links":[
       {"source": 7, "target": 9},
@@ -49,7 +48,7 @@
       {"source": 25, "target": 29},
       {"source": 29, "target": 6},
       {"source": 29, "target": 24},
-      {"source": 29, "target": 34},
+      {"source": 29, "target": 33},
       {"source": 29, "target": 8},
       {"source": 9, "target": 16},
       {"source": 16, "target": 4},
