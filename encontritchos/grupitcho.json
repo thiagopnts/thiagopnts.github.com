@@ -35,8 +35,7 @@
     {"index": 32, "name":"Uzunian", "picture": "pictures/uzunian.png"},
     {"index": 33, "name":"Marcella Nery", "picture": "pictures/marcella.png"},
     {"index": 34, "name":"Matheus Canella", "picture": "pictures/matheus.png"},
-    {"index": 35, "name":"Marina Oliveira", "picture": "pictures/marina.png"},
-    {"index": 36, "name":"Nunes", "picture": "pictures/nunes.png"}
+    {"index": 35, "name":"Marina Oliveira", "picture": "pictures/marina.png"}
   ],
   "links":[
       {"source": 7, "target": 9},
@@ -48,7 +47,6 @@
       {"source": 25, "target": 29},
       {"source": 29, "target": 6},
       {"source": 29, "target": 24},
-      {"source": 29, "target": 33},
       {"source": 29, "target": 8},
       {"source": 9, "target": 16},
       {"source": 16, "target": 4},
