@@ -38,10 +38,6 @@ d3.json("grupitcho.json", function(error, graph) {
       .style("fill", function(d) {
         var name = d.name.split(' ')[0];
 
-        if (name === 'Alessandra') {
-            this.setAttribute('r', 40);
-        }
-
         var picturepattern = defs.append('pattern')
             .attr('id', 'picturepattern' + name)
             .attr('height', 1)
