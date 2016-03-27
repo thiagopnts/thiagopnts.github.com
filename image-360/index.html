@@ -41,7 +41,11 @@ body { margin: 0; }
 				document.addEventListener('mousedown', onDocumentMouseDown, false);
 				document.addEventListener('mousemove', onDocumentMouseMove, false);
 				document.addEventListener('mouseup', onDocumentMouseUp, false);
-				document.addEventListener('dragover', function (event) {
+                document.addEventListener('touchstart',function(evt) { onDocumentMouseDown(evt.touches[0]) }, false);
+				//quick & dirty
+                document.addEventListener('touchmove',function(evt) { onDocumentMouseMove(evt.touches[0]); }, false);
+                document.addEventListener('touchend',function(evt) { onDocumentMouseUp(evt.touches[0]); }, false);
+				document.addEventListener('dragover', function(event) {
 					event.preventDefault();
 					event.dataTransfer.dropEffect = 'copy';
 				}, false);
@@ -64,7 +68,7 @@ body { margin: 0; }
 				//
 			}
 			function onDocumentMouseDown(event) {
-				event.preventDefault();
+				event.preventDefault && event.preventDefault();
 				isUserInteracting = true;
 				onPointerDownPointerX = event.clientX;
 				onPointerDownPointerY = event.clientY;
