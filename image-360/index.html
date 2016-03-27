@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>image 360</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <style type="text/css" media="screen">
 body { margin: 0; }
     </style>
@@ -45,6 +47,10 @@ body { margin: 0; }
 				//quick & dirty
                 document.addEventListener('touchmove',function(evt) {evt.preventDefault(); onDocumentMouseMove(evt.touches[0]); }, false);
                 document.addEventListener('touchend',function(evt) { onDocumentMouseUp(evt.touches[0]); }, false);
+                window.addEventListener('deviceorientation',function(evt) {
+                    lon = evt.gamma * -1;
+                    lat = evt.beta + -50.0;
+                }, false);
 				document.addEventListener('dragover', function(event) {
 					event.preventDefault();
 					event.dataTransfer.dropEffect = 'copy';
