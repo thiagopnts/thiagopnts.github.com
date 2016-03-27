@@ -24,7 +24,7 @@ body { margin: 0; }
 			function init() {
 				var container, mesh;
 				container = document.getElementById('container');
-				camera = new THREE.PerspectiveCamera(75, 1024 / 720, 1, 800);
+				camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 800);
 				camera.target = new THREE.Vector3(0, 0, 0);
 				scene = new THREE.Scene();
 				var geometry = new THREE.SphereGeometry(500, 60, 40);
@@ -36,7 +36,7 @@ body { margin: 0; }
 				scene.add(mesh);
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio(window.devicePixelRatio);
-				renderer.setSize(1024, 720);
+				renderer.setSize(window.innerWidth, window.innerHeight);
 				container.appendChild(renderer.domElement);
 				document.addEventListener('mousedown', onDocumentMouseDown, false);
 				document.addEventListener('mousemove', onDocumentMouseMove, false);
