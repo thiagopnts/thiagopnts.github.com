@@ -43,7 +43,7 @@ body { margin: 0; }
 				document.addEventListener('mouseup', onDocumentMouseUp, false);
                 document.addEventListener('touchstart',function(evt) { onDocumentMouseDown(evt.touches[0]) }, false);
 				//quick & dirty
-                document.addEventListener('touchmove',function(evt) { onDocumentMouseMove(evt.touches[0]); }, false);
+                document.addEventListener('touchmove',function(evt) {evt.preventDefault(); onDocumentMouseMove(evt.touches[0]); }, false);
                 document.addEventListener('touchend',function(evt) { onDocumentMouseUp(evt.touches[0]); }, false);
 				document.addEventListener('dragover', function(event) {
 					event.preventDefault();
