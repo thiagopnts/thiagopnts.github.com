@@ -1,0 +1,10 @@
+class CHIP8 {
+  constructor() {
+    this.v = new Uint8Array(16); // 16 8-bit registers
+    this.i = 0;                  // 1 address register
+    this.stack = [];             // 16 bytes stack
+    this.display =  new Uint8Array(64 * 32); // 64x32 display
+    this.pc = 0x200;                         // program counter starting at 0x200
+    this.memory = new Uint8Array(4 * 1024);  // 4kb memory
+  }
+}
