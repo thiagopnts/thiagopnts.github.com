@@ -30,6 +30,7 @@ import createTheme from "spectacle/lib/themes/default";
 
 // Import custom component
 import Interactive from "../assets/interactive";
+import Debugger from "../assets/chip-debugger";
 
 // Require CSS
 require("normalize.css");
@@ -55,6 +56,7 @@ const images = {
   title: require("../assets/title.png"),
   invaders: require("../assets/invader.jpg"),
   end: require("../assets/end.gif"),
+  me: require("../assets/me.png"),
 };
 
 preloader(images);
@@ -69,10 +71,19 @@ export default class Presentation extends React.Component {
     return (
       <Spectacle theme={theme}>
         <Deck transition={["zoom", "slide"]} transitionDuration={500} progress="pacman">
-          <Slide transition={["zoom"]} bgImage={images.background} bgColor="primary" notes="I still need to put the other cover here">
+          <Slide transition={["zoom"]} bgImage={images.background} bgColor="primary" >
             <Image src={images.title} top="30px" width="100%" height="100%" />
           </Slide>
-          <Slide transition={["slide"]} bgImage={images.bg} notes="talk about why I love emulators">
+          <Slide transition={["zoom"]} bgImage={images.bg2} bgColor="primary" >
+            <Image src={images.me} align="top center" margin="-100px 0 0 0" width="30%" height="30%" />
+            <Heading size={1} textColor="white" textFont="primary" >
+                Thiago Pontes
+            </Heading >
+            <Heading size={3} textColor="white" textFont="primary" >
+                @thiagopnts
+            </Heading >
+          </Slide>
+          <Slide transition={["slide"]} bgImage={images.bg} >
             <Heading size={2} caps fit textColor="white" textFont="primary" >
             I
             <Image src={images.heart} display="inline block" margin="1% 0 0 0" height="15px" align="flex-end"/>
@@ -82,21 +93,21 @@ export default class Presentation extends React.Component {
 
           <Slide transition={["slide"]} bgImage={images.bg2}>
 
-            <Heading size={2} caps fit textColor="white" textFont="primary" notes="">
-            Emulation is magic
+            <Heading size={2} caps fit textColor="white" textFont="primary" notes="For a long time, even after working as a software developer, I never really understood how emulators work">
+                Emulation is magic
             </Heading>
             <Image src={images.wizard} top="30px" width="15%" />
           </Slide>
 
           <Slide transition={["slide"]} bgImage={images.bg2}>
-            <Heading size={2} caps textColor="white" textFont="primary" >
+            <Heading size={2} caps textColor="white" textFont="primary" notes="explain what are roms, how its extracted and how emulators use it">
             roms
             </Heading>
             <Image src={images.chip} top="30px" width="15%" />
           </Slide>
 
           <Slide transition={["slide"]} bgImage={images.bg2}>
-            <Heading size={2} caps textColor="white" textFont="primary" >
+            <Heading size={2} caps textColor="white" textFont="primary" notes="talk about specs and how you can emulate something by just reproduce the specification in code">
             System Specs
             </Heading>
             <Image src={images.specs} top="30px" width="15%"/>
@@ -110,13 +121,13 @@ export default class Presentation extends React.Component {
           </Slide>
 
           <Slide transition={["slide"]} bgImage={images.bg2}>
-            <Heading size={2} caps textColor="white" textFont="primary" >
+            <Heading size={2} caps textColor="white" textFont="primary" notes="web audio, canvas, file api">
             javascript
             </Heading>
             <Image src={images.chest} top="30px" width="20%" />
           </Slide>
 
-          <Slide transition={["slide"]} bgImage={images.bg2}>
+          <Slide transition={["slide"]} bgImage={images.bg2} notes="chip-8 is actually a VM created to simplify coding. The VM is actually what we emulate. Many people choose it as a first emulation projection because it has a very simple spec">
             <Heading size={2} caps textColor="white" textFont="primary" >
             chip-8
             </Heading>
@@ -134,7 +145,7 @@ export default class Presentation extends React.Component {
               <Appear><ListItem>64x32 Pixels Display</ListItem></Appear>
               <Appear><ListItem>Program Counter starting at 0x200</ListItem></Appear>
               <Appear><ListItem>4KB Memory</ListItem></Appear>
-              <Appear><ListItem>35 OPCodes</ListItem></Appear>
+              <Appear><ListItem>35 16-bit OPCodes</ListItem></Appear>
             </List>
           </Slide>
           <Slide transition={["fade"]} bgColor="primary" textColor="secondary">
@@ -163,10 +174,11 @@ export default class Presentation extends React.Component {
             </List>
           </Slide>
 
-          <Slide transition={["fade"]} bgColor="secondary" textColor="primary" >
+          <Slide align="center flex-start" transition={["fade"]} bgColor="secondary" textColor="primary" notes="this is a debugger running a rom, we can see the current state of the memory, current opcode etc">
             <Heading size={2} caps textColor="white" textFont="primary" >
-            interactive stuff
+            Flow
             </Heading>
+            <Debugger />
           </Slide>
           <Slide transition={["fade"]} bgImage={images.end} textColor="primary" > </Slide>
         </Deck>
