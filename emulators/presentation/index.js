@@ -92,23 +92,23 @@ export default class Presentation extends React.Component {
             </Heading>
           </Slide>
 
-          <Slide transition={["slide"]} bgImage={images.bg2}>
+          <Slide transition={["slide"]} bgImage={images.bg2} notes="For a long time, even after working as a software developer, I never really understood how emulators work">
 
-            <Heading size={2} caps fit textColor="white" textFont="primary" notes="For a long time, even after working as a software developer, I never really understood how emulators work">
+            <Heading size={2} caps fit textColor="white" textFont="primary" >
                 Emulation is magic
             </Heading>
             <Image src={images.wizard} top="30px" width="15%" />
           </Slide>
 
-          <Slide transition={["slide"]} bgImage={images.bg2}>
-            <Heading size={2} caps textColor="white" textFont="primary" notes="explain what are roms, how its extracted and how emulators use it">
+          <Slide transition={["slide"]} bgImage={images.bg2} notes="explain what are roms, how its extracted and how emulators use it">
+            <Heading size={2} caps textColor="white" textFont="primary" >
             roms
             </Heading>
             <Image src={images.chip} top="30px" width="15%" />
           </Slide>
 
-          <Slide transition={["slide"]} bgImage={images.bg2}>
-            <Heading size={2} caps textColor="white" textFont="primary" notes="talk about specs and how you can emulate something by just reproduce the specification in code">
+          <Slide transition={["slide"]} bgImage={images.bg2} notes="talk about specs and how you can emulate something by just reproduce the specification in code">
+            <Heading size={2} caps textColor="white" textFont="primary" >
             System Specs
             </Heading>
             <Image src={images.specs} top="30px" width="15%"/>
@@ -121,14 +121,14 @@ export default class Presentation extends React.Component {
             <Image src={images.how} top="30px" width="20%" />
           </Slide>
 
-          <Slide transition={["slide"]} bgImage={images.bg2}>
-            <Heading size={2} caps textColor="white" textFont="primary" notes="web audio, canvas, file api">
+          <Slide transition={["slide"]} bgImage={images.bg2} notes="web audio, canvas, file api">
+            <Heading size={2} caps textColor="white" textFont="primary" >
             javascript
             </Heading>
             <Image src={images.chest} top="30px" width="20%" />
           </Slide>
 
-          <Slide transition={["slide"]} bgImage={images.bg2} notes="chip-8 is actually a VM created to simplify coding. The VM is actually what we emulate. Many people choose it as a first emulation projection because it has a very simple spec">
+          <Slide transition={["slide"]} bgImage={images.bg2} notes="chip-8 is actually a VM created to simplify game dev. The VM is actually what we emulate. Many people choose it as a first emulation project because it has a very simple spec">
             <Heading size={2} caps textColor="white" textFont="primary" >
             chip-8
             </Heading>
@@ -182,7 +182,7 @@ export default class Presentation extends React.Component {
             <Debugger />
           </Slide>
 
-          <Slide align="center flex-start" transition={["fade"]} bgColor="secondary" textColor="primary" notes="this is a debugger running a rom, we can see the current state of the memory, current opcode etc">
+          <Slide align="center flex-start" transition={["fade"]} bgColor="secondary" textColor="primary" notes="this is a debugger running a rom, we can see the current state of the screen buffer">
             <Heading size={2} caps textColor="white" textFont="primary" >
             Flow
             </Heading>
