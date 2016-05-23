@@ -57,7 +57,8 @@
     })();
 
     var _class$3 = (function () {
-        function _class(ctx) {
+        function _class() {
+            var ctx = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
             var scale = arguments.length <= 1 || arguments[1] === undefined ? 10 : arguments[1];
             babelHelpers.classCallCheck(this, _class);
 
@@ -66,10 +67,10 @@
             this.resolution = this.rows * this.columns;
             this.bitMap = new Array(this.resolution);
             this.scale = scale;
-            this.ctx = ctx;
+            //this.ctx = ctx;
 
-            this.width = ctx.canvas.width = this.columns * this.scale;
-            this.height = ctx.canvas.height = this.rows * this.scale;
+            //       this.width = //ctx.canvas.width = this.columns * this.scale;
+            //        this.height =// ctx.canvas.height = this.rows * this.scale;
         }
 
         /**
@@ -78,7 +79,7 @@
          */
 
         babelHelpers.createClass(_class, [{
-            key: 'clear',
+            key: "clear",
             value: function clear() {
                 this.bitMap = new Array(this.resolution);
             }
@@ -90,7 +91,7 @@
              */
 
         }, {
-            key: 'setPixel',
+            key: "setPixel",
             value: function setPixel(x, y) {
                 // Wrap around pixels that overflow the screen
                 if (x > this.columns - 1) while (x > this.columns - 1) {
@@ -107,34 +108,34 @@
                 return !this.bitMap[location];
             }
         }, {
-            key: 'render',
+            key: "render",
             value: function render() {
-                var i, x, y;
-
-                var ascii = '';
-
-                for (var _i = 0; _i < this.rows; _i++) {
-                    for (var j = 0; j < this.columns; j++) {
-                        if (this.bitMap[j + _i * 64]) {
-                            ascii += '😍';
-                        } else {
-                            ascii += '⬛️';
-                        }
-                    }
-                    ascii += '\n';
-                }
-                emojiScreen.innerText = ascii;
-                this.ctx.clearRect(0, 0, this.width, this.height);
-
-                for (i = 0; i < this.resolution; i++) {
-                    x = i % this.columns * this.scale;
-                    y = Math.floor(i / this.columns) * this.scale;
-
-                    if (!this.bitMap[i]) {
-                        this.ctx.fillStyle = "#000";
-                        this.ctx.fillRect(x, y, this.scale, this.scale);
-                    }
-                }
+                //      var i, x, y;
+                //
+                //      let ascii = '';
+                //
+                //      for (let i = 0; i < this.rows; i++) {
+                //          for (let j = 0; j < this.columns; j++) {
+                //              if(this.bitMap[j + (i * 64)]) {
+                //                  ascii += '😍'
+                //              } else {
+                //                  ascii += '⬛️'
+                //              }
+                //          }
+                //          ascii += '\n'
+                //      }
+                //      emojiScreen.innerText = ascii;
+                ////      this.ctx.clearRect(0, 0, this.width, this.height);
+                //
+                //      for (i = 0; i < this.resolution; i++) {
+                //        x = (i % this.columns) * this.scale;
+                //        y = Math.floor(i / this.columns) * this.scale;
+                //
+                //        if (!this.bitMap[i]) {
+                ////          this.ctx.fillStyle = "#000";
+                ////          this.ctx.fillRect(x, y, this.scale, this.scale);
+                //        }
+                //      }
             }
         }]);
         return _class;
@@ -258,7 +259,8 @@
 
         this.pc = 0x200;
         this.stack = new Array();
-        this.screen = { clear: function clear() {}, setPixel: function setPixel() {}, render: function render() {} };
+        //        this.screen = { clear: ()=>{}, setPixel: ()=>{}, render: () =>{} };
+        this.screen = new _class$3();
         this.input = new _class$4();
         this.speaker = { clear: function clear() {}, play: function play() {}, stop: function stop() {} };
         this.v = new Uint8Array(16);
@@ -333,6 +335,7 @@
           //
           //          memory.innerHTML = rows.join(' ');
           var opcode = this.memory[this.pc] << 8 | this.memory[this.pc + 1];
+          this.opcode = opcode;
           //          currentOpcode.innerText = `0x${opcode.toString(16).toUpperCase()}`;
           this.perform(opcode);
           this.updateTimers();
@@ -356,6 +359,7 @@
               //
               //          memory.innerHTML = rows.join(' ');
               var opcode = this.memory[this.pc] << 8 | this.memory[this.pc + 1];
+              this.opcode = opcode;
               //          currentOpcode.innerText = `0x${opcode.toString(16).toUpperCase()}`;
               this.perform(opcode);
             }
@@ -788,7 +792,6 @@
         key: 'loadRom',
         value: function loadRom(rom) {
           this.cpu.loadProgram(rom);
-          this.cpu.screen = this.screen;
           this.start();
         }
 

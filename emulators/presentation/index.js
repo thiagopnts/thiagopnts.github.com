@@ -31,6 +31,7 @@ import createTheme from "spectacle/lib/themes/default";
 // Import custom component
 import Interactive from "../assets/interactive";
 import Debugger from "../assets/chip-debugger";
+import DisplayDebugger from "../assets/chip-display-debugger";
 
 // Require CSS
 require("normalize.css");
@@ -180,6 +181,14 @@ export default class Presentation extends React.Component {
             </Heading>
             <Debugger />
           </Slide>
+
+          <Slide align="center flex-start" transition={["fade"]} bgColor="secondary" textColor="primary" notes="this is a debugger running a rom, we can see the current state of the memory, current opcode etc">
+            <Heading size={2} caps textColor="white" textFont="primary" >
+            Flow
+            </Heading>
+            <DisplayDebugger />
+          </Slide>
+
           <Slide transition={["fade"]} bgImage={images.end} textColor="primary" > </Slide>
         </Deck>
       </Spectacle>

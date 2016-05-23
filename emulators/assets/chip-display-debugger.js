@@ -9,11 +9,14 @@ export default class Chip8Debugger extends Component {
     window.chip8 = this.chip8;
     this.state = {
       started: false,
-      memory: new Uint8Array(10),
+      emoji: false,
+      organized: false,
+      display: new Uint8Array(64 * 32),
       pc: 0x0,
       opcode: 0x0000,
     }
   }
+
 
   startEmulation() {
 		var request = new XMLHttpRequest();
@@ -23,8 +26,8 @@ export default class Chip8Debugger extends Component {
         this.chip8.cpu.cycle = () => {
           let currentPc = this.chip8.cpu.pc;
           let opcode = this.chip8.cpu.memory[currentPc] << 8 | this.chip8.cpu.memory[currentPc + 1];
-          let memory = this.chip8.cpu.memory.slice(currentPc - 5, currentPc + 5);
-          this.setState({memory: memory, pc: currentPc, opcode: opcode || 0x00, started: true});
+          let display = this.chip8.cpu.screen.bitMap;
+          this.setState({pc: currentPc, opcode: opcode || 0x00, display: display, started: true});
           original();
         }
         this.chip8.loadRom(new Uint8Array(request.response));
@@ -42,6 +45,15 @@ export default class Chip8Debugger extends Component {
   resumeEmulation() {
     this.chip8.cpu.paused = false;
   }
+
+  organize() {
+    this.setState({organized: !this.state.organize, emoji: false});
+  }
+
+  emojis() {
+    this.setState({emoji: !this.state.emoji, organized: false});
+  }
+
 
   nextInstruction() {
     this.chip8.cpu.next();
@@ -66,60 +78,59 @@ export default class Chip8Debugger extends Component {
           <button style={styles} type="button" onClick={this.startEmulation.bind(this)}>Start</button>
       )
     } else {
-      let aux = 5;
-      let memory = this.state.memory;
-      let currentStyle = {
-        backgroundColor: 'rgba(255, 255, 255, 0.5)',
-      };
-
-      let tableStyle = {
-        backgroundColor: 'rgba(0, 0, 0, 0.3)',
-        border: '1px solid black',
-        margin: '0 auto',
-        fontSize: '.5em',
-      }
-
-      let tdStyle = {
-        borderBottom: '1px solid black',
-        borderLeft: '1px solid black',
-        padding: '.5em 1em',
-      }
-
       let opStyle = {
         fontWeight: 'bold',
         fontSize: '.9em',
       }
+      let aux = 5;
+      let memory = this.state.memory;
+      let display = this.state.display;
+      let divStyle = {
+        marginLeft: -6000,
+      }
+
+      let displays = [<div style={divStyle}> <p>{display}</p> </div>];
 
       let rows = [];
-      for (var i = 0; i < memory.length; i++) {
-        let addr = this.state.pc - aux--;
-        let data = memory[i];
-        let isCurrentInstruction = (this.state.pc === addr) || ((this.state.pc + 1) === addr);
-        rows.push(
-          <tr style={isCurrentInstruction ? currentStyle : []}>
-            <td style={tdStyle}>{ '0x' + addr.toString(16).toUpperCase()}</td>
-            <td style={tdStyle}>{'0x' + data.toString(16).toUpperCase()} </td>
-          </tr>
-        );
+      let pixelStyle = undefined;
+      if (this.state.emoji) {
+        pixelStyle = {
+          fontSize: '0.2em',
+          width: '100%',
+        };
+      } else {
+        pixelStyle = {
+          fontSize: '0.4em',
+          lineHeight: '10px',
+          width: '100%',
+        };
       }
+      if(this.state.organized || this.state.emoji) {
+				for (let i = 0; i < 32; i++) {
+						for (let j = 0; j < 64; j++) {
+              if(this.state.organized && !this.state.emoji) {
+						   rows.push(<span>{display[j + (i * 64)] === 1 ? '1'  : '0'} </span>);
+              } else {
+						   rows.push(<span>{display[j + (i * 64)] === 1 ? '😍'  : '⬛️'} </span>);
+						  }
+						}
+						rows.push(<br/>);
+				}
+      }
+
       return (
         <div>
           <button style={styles} type="button" onClick={this.pauseEmulation.bind(this)}>Pause</button>
           <button style={styles} type="button" onClick={this.resumeEmulation.bind(this)}>Resume</button>
           <button style={styles} type="button" onClick={this.nextInstruction.bind(this)}>Next</button>
+          <button style={styles} type="button" onClick={this.organize.bind(this)}>Organize</button>
+          <button style={styles} type="button" onClick={this.emojis.bind(this)}>Emojis</button>
           <p style={opStyle}>CURRENT OPCODE: 0x{this.state.opcode.toString(16).toUpperCase()}</p>
-          <table style={tableStyle}>
-            <thead>
-                <tr>
-                  <th style={tdStyle}>Address</th>
-                  <th style={tdStyle}>Data</th>
-                </tr>
-              </thead>
-              <tbody >
-              {rows}
-              </tbody>
-          </table>
-
+          {displays}
+          <br />
+          <div style={pixelStyle}>
+          {rows}
+          </div>
         </div>
       )
     }
