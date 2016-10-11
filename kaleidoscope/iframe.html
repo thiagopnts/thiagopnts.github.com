@@ -8,6 +8,12 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-touch-fullscreen" content="yes">
+    <script type="text/javascript" charset="utf-8">
+window.addEventListener('devicemotion', function(e) {
+	var rotationRate = e.rotationRate;
+    frames[0].postMessage({rotationRate: rotationRate, deviceOrientation: window.orientation, portrait: window.matchMedia("(orientation: portrait)").matches}, '*');
+});
+    </script>
 
     <meta id="extViewportMeta" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
     <style>
