@@ -11,7 +11,7 @@
     <script type="text/javascript" charset="utf-8">
 window.addEventListener('devicemotion', function(e) {
 	var rotationRate = e.rotationRate;
-    frames[0].postMessage({rotationRate: rotationRate, deviceOrientation: window.orientation, portrait: window.matchMedia("(orientation: portrait)").matches}, '*');
+    frames[0].postMessage({rotationRate: rotationRate, orientation: window.orientation, portrait: window.matchMedia("(orientation: portrait)").matches}, '*');
 });
     </script>
 
