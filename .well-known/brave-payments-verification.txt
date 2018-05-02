@@ -1,4 +1,4 @@
 This is a Brave Payments publisher verification file.
 
 Domain: thiago.me
-Token: 69512682bcfde917e2c439c2f325be060898a120475c691b55fec6241f0cd631
+Token: fa3bc5c9f51463f83b3f85df09fcdfe73afdc637dd65798d5d8a61d59b756c70
